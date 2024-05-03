@@ -1,4 +1,4 @@
-/* custom-tab-bar/index.wxss */
+/* pages/custom-tab-bar/index.wxss */
 
 .tab-bar {
   position: fixed;
@@ -30,11 +30,11 @@
   flex-direction: column;
 }
 
-.tab-bar-item image {
+.tab-bar-item cover-image {
   width: 27px;
   height: 27px;
 }
 
-.tab-bar-item view {
+.tab-bar-item cover-view {
   font-size: 10px;
 }
