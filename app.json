@@ -5,39 +5,32 @@
     "pages/logins/login",
     "pages/packages/package"
   ],
-  "tabBar": {
-    "custom": true,
-    "color": "#7A7E83",
-    "selectedColor": "#3d44ff",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "images/tabbar_home.png",
-        "selectedIconPath": "images/tabbar_home_HL.png",
-        "text": "主页"
-      },
-      {
-        "pagePath": "pages/packages/package",
-        "iconPath": "images/tabbar_package.png",
-        "selectedIconPath": "images/tabbar_package_HL.png",
-        "text": "包裹"
-      },
-      {
-        "pagePath": "pages/logins/login",
-        "iconPath": "images/tabbar_login.png",
-        "selectedIconPath": "images/tabbar_login_HL.png",
-        "text": "登录"
-      }
-    ]
+  "usingComponents": {
+    "t-button": "/miniprogram_npm/tdesign-miniprogram/button/button"
   },
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "Sea Express",
     "navigationBarBackgroundColor": "#ffffff"
   },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "images/tabbar_home.png",
+      "selectedIconPath": "images/tabbar_home_HL.png"
+    },{
+      "pagePath": "pages/packages/package",
+      "text": "包裹",
+      "iconPath": "images/tabbar_package.png",
+      "selectedIconPath": "images/tabbar_package_HL.png"
+    },{
+      "pagePath": "pages/logins/login",
+      "text": "登录",
+      "iconPath": "images/tabbar_login.png",
+      "selectedIconPath": "images/tabbar_login_HL.png"
+    }]
+  },
   "componentFramework": "glass-easel",
-  "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "sitemapLocation": "sitemap.json"
 }

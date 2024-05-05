@@ -2,7 +2,7 @@
 Page({
   data: {
     phoneNumber: '', 
-    password: '' 
+    password: '',
   },
 
   bindPhoneNumberInput: function(e) {
@@ -20,5 +20,5 @@ Page({
   login: function() {
     const app = getApp();
     app.onLogin(this.data.phoneNumber, this.data.password);
-  }
+  },
 });
