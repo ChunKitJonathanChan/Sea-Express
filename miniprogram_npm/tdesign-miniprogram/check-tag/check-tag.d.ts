@@ -24,6 +24,5 @@ export default class CheckTag extends SuperComponent {
     methods: {
         setClass(): void;
         onClick(): void;
-        onClose(e: WechatMiniprogram.BaseEvent): void;
     };
 }

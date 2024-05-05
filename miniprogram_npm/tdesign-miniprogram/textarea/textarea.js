@@ -77,9 +77,9 @@ let Textarea = class Textarea extends SuperComponent {
                 };
             },
             onInput(event) {
-                const { value, cursor } = event.detail;
+                const { value } = event.detail;
                 this.updateValue(value);
-                this.triggerEvent('change', { value: this.data.value, cursor });
+                this.triggerEvent('change', { value: this.data.value });
             },
             onFocus(event) {
                 this.triggerEvent('focus', Object.assign({}, event.detail));

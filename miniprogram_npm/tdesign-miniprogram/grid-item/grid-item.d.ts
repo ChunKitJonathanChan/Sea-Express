@@ -14,7 +14,7 @@ export default class GridItem extends SuperComponent {
         gridItemContentStyle: string;
         align: string;
         column: number;
-        describedbyID: string;
+        labelID: string;
     };
     observers: {
         icon(icon: any): void;

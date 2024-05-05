@@ -68,19 +68,14 @@ export default class Stepper extends SuperComponent {
         classPrefix: string;
         prefix: string;
     };
-    lifetimes: {
-        attached(): void;
-    };
+    attached(): void;
     isDisabled(type: any): boolean;
-    getLen(num: number): number;
-    add(a: number, b: number): number;
-    format(value: any): string;
+    format(value: any): number;
     setValue(value: any): void;
     minusValue(): boolean;
     plusValue(): boolean;
-    methods: {
-        handleFocus(e: any): void;
-        handleInput(e: any): void;
-        handleBlur(e: any): void;
-    };
+    changeValue(e: any): string | 0;
+    focusHandle(e: any): void;
+    inputHandle(e: any): void;
+    blurHandle(e: any): void;
 }

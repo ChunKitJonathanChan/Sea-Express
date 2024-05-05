@@ -1,14 +1,9 @@
-import { PopupProps } from '../popup/index';
 export interface TdDateTimePickerProps {
     cancelBtn?: {
         type: StringConstructor;
         value?: string;
     };
     confirmBtn?: {
-        type: StringConstructor;
-        value?: string;
-    };
-    customLocale?: {
         type: StringConstructor;
         value?: string;
     };
@@ -32,10 +27,6 @@ export interface TdDateTimePickerProps {
         type: null;
         value?: DateTimePickerMode;
     };
-    popupProps?: {
-        type: ObjectConstructor;
-        value?: PopupProps;
-    };
     showWeek?: {
         type: BooleanConstructor;
         value?: boolean;
@@ -43,10 +34,6 @@ export interface TdDateTimePickerProps {
     start?: {
         type: null;
         value?: string | number;
-    };
-    steps?: {
-        type: ObjectConstructor;
-        value?: object;
     };
     title?: {
         type: StringConstructor;

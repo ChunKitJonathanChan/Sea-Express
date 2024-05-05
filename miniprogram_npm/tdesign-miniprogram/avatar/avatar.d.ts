@@ -9,7 +9,7 @@ export default class Avatar extends SuperComponent {
         classPrefix: string;
         isShow: boolean;
         zIndex: number;
-        borderedWithGroup: boolean;
+        bordered: boolean;
     };
     relations: RelationsOptions;
     observers: {

@@ -29,12 +29,11 @@ let Rate = class Rate extends SuperComponent {
             tipsLeft: 0,
             actionType: '',
             scaleIndex: -1,
-            isVisibleToScreenReader: false,
         };
         this.methods = {
             onTouch(e, eventType) {
                 const { count, allowHalf, gap, value: currentValue, size } = this.properties;
-                const [touch] = e.changedTouches;
+                const [touch] = e.touches;
                 const margin = unitConvert(gap);
                 getRect(this, `.${name}__wrapper`).then((rect) => {
                     const { width, left } = rect;
@@ -75,7 +74,6 @@ let Rate = class Rate extends SuperComponent {
             },
             onTouchMove(e) {
                 this.onTouch(e, 'move');
-                this.showAlertText();
             },
             onTouchEnd() {
                 this.touchEnd = true;
@@ -93,18 +91,6 @@ let Rate = class Rate extends SuperComponent {
                     return;
                 this._trigger('change', { value });
                 setTimeout(() => this.setData({ tipsVisible: false, scaleIndex: -1 }), 300);
-            },
-            showAlertText() {
-                if (this.data.isVisibleToScreenReader === true)
-                    return;
-                this.setData({
-                    isVisibleToScreenReader: true,
-                });
-                setTimeout(() => {
-                    this.setData({
-                        isVisibleToScreenReader: false,
-                    });
-                }, 2e3);
             },
         };
     }

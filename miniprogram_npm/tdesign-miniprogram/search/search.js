@@ -7,7 +7,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
-import { getCharacterLength } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-search`;
 let Search = class Search extends SuperComponent {
@@ -25,28 +24,32 @@ let Search = class Search extends SuperComponent {
             multipleSlots: true,
         };
         this.properties = props;
-        this.observers = {};
+        this.observers = {
+            focus(nextValue) {
+                this.setData({ 'localValue.focus': nextValue });
+            },
+        };
         this.data = {
             classPrefix: name,
             prefix,
+            localValue: {
+                focus: false,
+            },
         };
     }
     onInput(e) {
-        let { value } = e.detail;
-        const { maxcharacter } = this.properties;
-        if (maxcharacter && typeof maxcharacter === 'number' && maxcharacter > 0) {
-            const { characters } = getCharacterLength('maxcharacter', value, maxcharacter);
-            value = characters;
-        }
+        const { value } = e.detail;
         this.setData({ value });
         this.triggerEvent('change', { value });
     }
     onFocus(e) {
         const { value } = e.detail;
+        this.setData({ 'localValue.focus': true });
         this.triggerEvent('focus', { value });
     }
     onBlur(e) {
         const { value } = e.detail;
+        this.setData({ 'localValue.focus': false });
         this.triggerEvent('blur', { value });
     }
     handleClear() {

@@ -21,10 +21,6 @@ const props = {
         type: null,
         value: 8,
     },
-    iconPrefix: {
-        type: String,
-        value: undefined,
-    },
     icon: {
         type: null,
     },
@@ -47,10 +43,6 @@ const props = {
     defaultValue: {
         type: Number,
         value: 0,
-    },
-    placement: {
-        type: String,
-        value: 'top',
     },
 };
 export default props;

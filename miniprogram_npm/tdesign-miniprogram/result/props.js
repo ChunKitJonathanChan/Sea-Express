@@ -2,6 +2,9 @@ const props = {
     description: {
         type: String,
     },
+    externalClasses: {
+        type: Array,
+    },
     icon: {
         type: null,
         value: true,

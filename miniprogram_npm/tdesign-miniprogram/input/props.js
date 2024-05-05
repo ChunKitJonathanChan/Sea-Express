@@ -15,10 +15,6 @@ const props = {
         type: null,
         value: false,
     },
-    clearTrigger: {
-        type: String,
-        value: 'always',
-    },
     disabled: {
         type: Boolean,
         value: false,
@@ -41,7 +37,6 @@ const props = {
     },
     maxlength: {
         type: Number,
-        value: -1,
     },
     placeholder: {
         type: String,

@@ -12,10 +12,6 @@ export interface TdCascaderProps<CascaderOption extends TreeOptionData = TreeOpt
         type: ArrayConstructor;
         value?: Array<CascaderOption>;
     };
-    placeholder?: {
-        type: StringConstructor;
-        value?: string;
-    };
     subTitles?: {
         type: ArrayConstructor;
         value?: Array<string>;

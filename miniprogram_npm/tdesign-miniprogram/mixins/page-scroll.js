@@ -4,23 +4,19 @@ const onPageScroll = function (event) {
     if (!page)
         return;
     const { pageScroller } = page;
-    pageScroller === null || pageScroller === void 0 ? void 0 : pageScroller.forEach((scroller) => {
+    pageScroller.forEach((scroller) => {
         if (typeof scroller === 'function') {
             scroller(event);
         }
     });
 };
-export default (funcName = 'onScroll') => {
+export default (scroller) => {
     return Behavior({
         attached() {
-            var _a;
             const page = getCurrentPage();
             if (!page)
                 return;
-            const bindScroller = (_a = this[funcName]) === null || _a === void 0 ? void 0 : _a.bind(this);
-            if (bindScroller) {
-                this._pageScroller = bindScroller;
-            }
+            const bindScroller = scroller.bind(this);
             if (Array.isArray(page.pageScroller)) {
                 page.pageScroller.push(bindScroller);
             }
@@ -35,7 +31,7 @@ export default (funcName = 'onScroll') => {
             const page = getCurrentPage();
             if (!page)
                 return;
-            page.pageScroller = ((_a = page.pageScroller) === null || _a === void 0 ? void 0 : _a.filter((item) => item !== this._pageScroller)) || [];
+            page.pageScroller = ((_a = page.pageScroller) === null || _a === void 0 ? void 0 : _a.filter((item) => item !== scroller)) || [];
         },
     });
 };

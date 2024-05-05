@@ -4,7 +4,7 @@ const props = {
         value: 'middle',
     },
     arrow: {
-        type: null,
+        type: Boolean,
         value: false,
     },
     bordered: {
@@ -28,7 +28,7 @@ const props = {
         value: 'navigateTo',
     },
     leftIcon: {
-        type: null,
+        type: String,
     },
     note: {
         type: String,
@@ -38,7 +38,7 @@ const props = {
         value: false,
     },
     rightIcon: {
-        type: null,
+        type: String,
     },
     title: {
         type: String,

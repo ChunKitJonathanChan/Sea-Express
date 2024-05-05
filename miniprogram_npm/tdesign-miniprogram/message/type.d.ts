@@ -59,14 +59,6 @@ export interface TdMessageProps {
         type: null;
         value?: string | object;
     };
-    gap?: {
-        type: null;
-        value?: string | number;
-    };
-    single?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
 }
 export declare type MessageAlignType = 'left' | 'center';
 export interface DrawMarquee {

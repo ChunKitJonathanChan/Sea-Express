@@ -19,7 +19,7 @@
       wx:for-item="option"
       data-index="{{ index }}"
     >
-      {{option[labelAlias]}}
+      {{option.label}}
     </view>
   </view>
 </view>

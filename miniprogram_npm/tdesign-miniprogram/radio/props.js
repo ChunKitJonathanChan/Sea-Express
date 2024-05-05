@@ -1,7 +1,7 @@
 const props = {
     placement: {
         type: String,
-        value: null,
+        value: 'left',
     },
     allowUncheck: {
         type: Boolean,
@@ -23,10 +23,6 @@ const props = {
         type: String,
     },
     contentDisabled: {
-        type: Boolean,
-        value: false,
-    },
-    readonly: {
         type: Boolean,
         value: false,
     },

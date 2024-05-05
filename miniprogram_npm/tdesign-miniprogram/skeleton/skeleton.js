@@ -36,14 +36,10 @@ let Skeleton = class Skeleton extends SuperComponent {
             rowCol() {
                 this.init();
             },
-            'loading, delay'() {
-                this.isShowSkeleton();
-            },
         };
         this.lifetimes = {
             attached() {
                 this.init();
-                this.isShowSkeleton();
             },
         };
         this.methods = {
@@ -111,20 +107,6 @@ let Skeleton = class Skeleton extends SuperComponent {
                     }
                 });
                 return style;
-            },
-            isShowSkeleton() {
-                const { loading, delay } = this.properties;
-                if (!loading || delay === 0) {
-                    this.setData({
-                        isShow: loading,
-                    });
-                    return;
-                }
-                setTimeout(() => {
-                    this.setData({
-                        isShow: loading,
-                    });
-                }, delay);
             },
         };
     }

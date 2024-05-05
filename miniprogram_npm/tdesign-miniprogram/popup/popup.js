@@ -25,14 +25,15 @@ let Popup = class Popup extends SuperComponent {
             classPrefix: name,
         };
         this.methods = {
+            onStopPropagation() { },
             handleOverlayClick() {
                 const { closeOnOverlayClick } = this.properties;
                 if (closeOnOverlayClick) {
-                    this.triggerEvent('visible-change', { visible: false, trigger: 'overlay' });
+                    this.triggerEvent('visible-change', { visible: false });
                 }
             },
             handleClose() {
-                this.triggerEvent('visible-change', { visible: false, trigger: 'close-btn' });
+                this.triggerEvent('visible-change', { visible: false });
             },
         };
     }

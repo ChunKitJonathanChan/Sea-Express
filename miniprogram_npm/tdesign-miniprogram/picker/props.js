@@ -7,6 +7,10 @@ const props = {
         type: null,
         value: true,
     },
+    columns: {
+        type: null,
+        value: [],
+    },
     confirmBtn: {
         type: null,
         value: true,
@@ -15,12 +19,8 @@ const props = {
         type: Boolean,
         value: true,
     },
-    keys: {
-        type: Object,
-    },
-    popupProps: {
-        type: Object,
-        value: {},
+    renderLabel: {
+        type: null,
     },
     title: {
         type: String,

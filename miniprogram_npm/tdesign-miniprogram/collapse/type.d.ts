@@ -1,4 +1,8 @@
 export interface TdCollapseProps {
+    style?: {
+        type: StringConstructor;
+        value?: string;
+    };
     defaultExpandAll?: {
         type: BooleanConstructor;
         value?: boolean;

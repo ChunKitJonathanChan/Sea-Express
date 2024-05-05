@@ -10,6 +10,4 @@
 >
   <include src="./template.wxml" />
 </t-popup>
-<block wx:else>
-  <include src="./template.wxml" />
-</block>
+<include wx:else src="./template.wxml" />

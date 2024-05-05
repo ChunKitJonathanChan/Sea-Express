@@ -9,11 +9,15 @@ export default class CheckBox extends SuperComponent {
             type: StringConstructor;
             value: string;
         };
-        block?: {
+        borderless: {
             type: BooleanConstructor;
-            value?: boolean;
+            value: boolean;
         };
-        borderless?: {
+        placement?: {
+            type: StringConstructor;
+            value?: "left" | "right";
+        };
+        block?: {
             type: BooleanConstructor;
             value?: boolean;
         };
@@ -36,6 +40,10 @@ export default class CheckBox extends SuperComponent {
         contentDisabled?: {
             type: BooleanConstructor;
             value?: boolean;
+        };
+        style?: {
+            type: StringConstructor;
+            value?: string;
         };
         disabled?: {
             type: BooleanConstructor;
@@ -69,10 +77,6 @@ export default class CheckBox extends SuperComponent {
             type: StringConstructor;
             value?: string;
         };
-        placement?: {
-            type: StringConstructor;
-            value?: "left" | "right";
-        };
         readonly?: {
             type: BooleanConstructor;
             value?: boolean;
@@ -85,17 +89,12 @@ export default class CheckBox extends SuperComponent {
     data: {
         prefix: string;
         classPrefix: string;
-        _disabled: boolean;
-    };
-    observers: {
-        disabled(v: any): void;
     };
     controlledProps: {
         key: string;
         event: string;
     }[];
     methods: {
-        handleTap(e: WechatMiniprogram.TouchEvent): void;
-        setDisabled(disabled: Boolean): void;
+        onChange(e: WechatMiniprogram.TouchEvent): void;
     };
 }

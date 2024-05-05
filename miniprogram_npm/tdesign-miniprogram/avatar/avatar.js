@@ -15,6 +15,7 @@ let Avatar = class Avatar extends SuperComponent {
         super(...arguments);
         this.options = {
             multipleSlots: true,
+            styleIsolation: 'apply-shared',
         };
         this.externalClasses = [
             `${prefix}-class`,
@@ -29,7 +30,7 @@ let Avatar = class Avatar extends SuperComponent {
             classPrefix: name,
             isShow: true,
             zIndex: 0,
-            borderedWithGroup: false,
+            bordered: false,
         };
         this.relations = {
             '../avatar-group/avatar-group': {
@@ -39,7 +40,7 @@ let Avatar = class Avatar extends SuperComponent {
                     this.parent = parent;
                     this.setData({
                         size: (_a = this.data.size) !== null && _a !== void 0 ? _a : parent.data.size,
-                        borderedWithGroup: true,
+                        bordered: true,
                     });
                 },
             },

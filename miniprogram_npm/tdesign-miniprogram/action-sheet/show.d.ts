@@ -12,15 +12,13 @@ export declare enum ActionSheetTheme {
     Grid = "grid"
 }
 interface ActionSheetProps {
-    align: 'center' | 'left';
+    visible: boolean;
+    items: Array<string | ActionSheetItem>;
+    defaultVisible?: boolean;
     cancelText?: string;
     count?: number;
-    description: string;
-    items: Array<string | ActionSheetItem>;
     showCancel?: boolean;
     theme?: ActionSheetTheme;
-    visible: boolean;
-    defaultVisible?: boolean;
 }
 export interface ActionSheetShowOption extends Omit<ActionSheetProps, 'visible'> {
     context?: Context;

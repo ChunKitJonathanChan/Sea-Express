@@ -50,13 +50,5 @@ const props = {
     link: {
         type: null,
     },
-    gap: {
-        type: null,
-        value: 12,
-    },
-    single: {
-        type: Boolean,
-        value: true,
-    },
 };
 export default props;

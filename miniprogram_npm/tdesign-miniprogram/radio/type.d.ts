@@ -31,10 +31,6 @@ export interface TdRadioProps<T = RadioValue> {
         type: StringConstructor;
         value?: string;
     };
-    readonly?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
     disabled?: {
         type: BooleanConstructor;
         value?: boolean;

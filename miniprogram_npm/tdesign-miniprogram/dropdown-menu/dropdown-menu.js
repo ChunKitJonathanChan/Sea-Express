@@ -7,7 +7,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
-import { calcIcon } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-dropdown-menu`;
 let DropdownMenu = class DropdownMenu extends SuperComponent {
@@ -22,7 +21,6 @@ let DropdownMenu = class DropdownMenu extends SuperComponent {
             menus: null,
             activeIdx: -1,
             bottom: 0,
-            _arrowIcon: { name: props.arrowIcon.value },
         };
         this.relations = {
             '../dropdown-item/dropdown-item': {
@@ -32,16 +30,6 @@ let DropdownMenu = class DropdownMenu extends SuperComponent {
         this.lifetimes = {
             ready() {
                 this.getAllItems();
-            },
-        };
-        this.observers = {
-            arrowIcon(v) {
-                this.setData({
-                    _arrowIcon: calcIcon(v),
-                });
-            },
-            activeIdx(v) {
-                this.triggerEvent(v === -1 ? 'close' : 'open');
             },
         };
         this.methods = {
@@ -81,10 +69,7 @@ let DropdownMenu = class DropdownMenu extends SuperComponent {
                 }
             },
             getAllItems() {
-                const menus = this.$children.map(({ data }) => ({
-                    label: data.label || data.computedLabel,
-                    disabled: data.disabled,
-                }));
+                const menus = this.$children.map(({ data }) => ({ label: data.label, disabled: data.disabled }));
                 this.setData({
                     menus,
                 });
@@ -93,7 +78,6 @@ let DropdownMenu = class DropdownMenu extends SuperComponent {
                 const { index } = e.currentTarget.dataset;
                 this.toggle(index);
             },
-            noop() { },
         };
     }
 };

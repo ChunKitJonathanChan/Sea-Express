@@ -51,9 +51,5 @@ export interface TdSliderProps {
         type: null;
         value?: SliderValue;
     };
-    vertical?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
 }
 export declare type SliderValue = number | Array<number>;

@@ -20,21 +20,21 @@
       <t-side-bar-item
         wx:for="{{treeOptions[level]}}"
         wx:key="index"
-        label="{{item.label}}"
-        value="{{item.value}}"
+        label="{{item[labelAlias]}}"
+        value="{{item[valueAlias]}}"
         t-class="{{prefix}}-class-left-item"
       />
     </t-side-bar>
     <block wx:elif="{{level != leafLevel}}">
       <view
         wx:for="{{treeOptions[level]}}"
-        wx:key="value"
+        wx:key="index"
         bind:tap="handleTreeClick"
         data-level="{{level}}"
-        data-value="{{item.value}}"
-        class="{{_.cls(classPrefix + '__item', [['active', item.value === value[level]]])}} {{prefix}}-class-middle-item"
+        data-value="{{item[valueAlias]}}"
+        class="{{_.cls(classPrefix + '__item', [['active', item[valueAlias] === value[level]]])}} {{prefix}}-class-middle-item"
       >
-        {{item.label}}
+        {{item[labelAlias]}}
       </view>
     </block>
     <t-radio-group
@@ -50,11 +50,10 @@
         icon="line"
         class="{{classPrefix}}__radio-item {{prefix}}-class-right-item"
         t-class-label="{{prefix}}-class-right-item-label"
-        value="{{item.value}}"
-        maxLabelRow="{{1}}"
+        value="{{item[valueAlias]}}"
         borderless
-        placement="right"
-        >{{item.label}}</t-radio
+        align="right"
+        >{{item[labelAlias]}}</t-radio
       >
     </t-radio-group>
     <t-checkbox-group
@@ -67,14 +66,13 @@
       <t-checkbox
         wx:for="{{treeOptions[level]}}"
         wx:key="value"
-        placement="right"
+        align="right"
         icon="line"
-        maxLabelRow="{{1}}"
         class="{{prefix}}-class-right-item"
         t-class-label="{{prefix}}-class-right-item-label"
         borderless
-        value="{{item.value}}"
-        >{{item.label}}</t-checkbox
+        value="{{item[valueAlias]}}"
+        >{{item[labelAlias]}}</t-checkbox
       >
     </t-checkbox-group>
   </scroll-view>

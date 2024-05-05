@@ -7,22 +7,19 @@ export default class Cascader extends SuperComponent {
     externalClasses: string[];
     options: WechatMiniprogram.Component.ComponentOptions;
     properties: TdCascaderProps<import("../common/common").TreeOptionData>;
-    controlledProps: {
-        key: string;
-        event: string;
-    }[];
     data: {
         prefix: string;
         name: string;
         stepIndex: number;
         selectedIndexes: any[];
         selectedValue: any[];
+        defaultOptionLabel: string;
         scrollTopList: any[];
-        steps: any[];
+        steps: string[];
     };
     observers: {
         visible(v: any): void;
-        value(): void;
+        'value, options'(): void;
         'selectedIndexes, options'(): void;
         stepIndex(): Promise<void>;
     };

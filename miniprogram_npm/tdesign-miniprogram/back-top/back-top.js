@@ -27,15 +27,10 @@ let BackTop = class BackTop extends SuperComponent {
             prefix,
             classPrefix: name,
             _icon: null,
-            hidden: true,
         };
         this.observers = {
             icon() {
                 this.setIcon();
-            },
-            scrollTop(value) {
-                const { visibilityHeight } = this.properties;
-                this.setData({ hidden: value < visibilityHeight });
             },
         };
         this.lifetimes = {
@@ -55,7 +50,6 @@ let BackTop = class BackTop extends SuperComponent {
                 this.triggerEvent('to-top');
                 if (this.$parent) {
                     (_a = this.$parent) === null || _a === void 0 ? void 0 : _a.setScrollTop(0);
-                    this.setData({ hidden: true });
                 }
                 else {
                     wx.pageScrollTo({

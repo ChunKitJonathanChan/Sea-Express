@@ -21,9 +21,7 @@ let ImageViewer = class ImageViewer extends SuperComponent {
             currentSwiperIndex: 0,
             windowHeight: 0,
             windowWidth: 0,
-            swiperStyle: {},
-            imagesStyle: {},
-            maskTop: 0,
+            imagesShape: {},
         };
         this.options = {
             multipleSlots: true,
@@ -52,17 +50,6 @@ let ImageViewer = class ImageViewer extends SuperComponent {
             },
         };
         this.methods = {
-            calcMaskTop() {
-                if (this.data.usingCustomNavbar) {
-                    const rect = (wx === null || wx === void 0 ? void 0 : wx.getMenuButtonBoundingClientRect()) || null;
-                    const { statusBarHeight } = wx.getSystemInfoSync();
-                    if (rect && statusBarHeight) {
-                        this.setData({
-                            maskTop: rect.top - statusBarHeight + rect.bottom,
-                        });
-                    }
-                }
-            },
             saveScreenSize() {
                 const { windowHeight, windowWidth } = wx.getSystemInfoSync();
                 this.setData({
@@ -91,34 +78,21 @@ let ImageViewer = class ImageViewer extends SuperComponent {
                         },
                     };
                 }
-                const scaledHeight = ratio * windowHeight * 2;
-                if (scaledHeight < windowWidth) {
-                    return {
-                        styleObj: {
-                            width: `${scaledHeight}rpx`,
-                            height: '100vh',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                        },
-                    };
-                }
                 return {
                     styleObj: {
-                        width: '100vw',
-                        height: `${(windowWidth / imageWidth) * imageHeight * 2}rpx`,
+                        width: `${ratio * windowHeight * 2}rpx`,
+                        height: '100vh',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
                     },
                 };
             },
             onImageLoadSuccess(e) {
                 const { detail: { width, height }, currentTarget: { dataset: { index }, }, } = e;
                 const { mode, styleObj } = this.calcImageDisplayStyle(width, height);
-                const originImagesStyle = this.data.imagesStyle;
-                const originSwiperStyle = this.data.swiperStyle;
+                const origin = this.data.imagesShape;
                 this.setData({
-                    swiperStyle: Object.assign(Object.assign({}, originSwiperStyle), { [index]: {
-                            style: `height: ${styleObj.height}`,
-                        } }),
-                    imagesStyle: Object.assign(Object.assign({}, originImagesStyle), { [index]: {
+                    imagesShape: Object.assign(Object.assign({}, origin), { [index]: {
                             mode,
                             style: styles(Object.assign({}, styleObj)),
                         } }),
@@ -142,7 +116,6 @@ let ImageViewer = class ImageViewer extends SuperComponent {
     }
     ready() {
         this.saveScreenSize();
-        this.calcMaskTop();
     }
 };
 ImageViewer = __decorate([

@@ -1,4 +1,3 @@
-<import src="../common/template/icon.wxml" />
 <wxs src="../common/utils.wxs" module="_" />
 
 <view
@@ -11,10 +10,10 @@
   aria-label="{{ariaLabel}}"
 >
   <view class="{{classPrefix}}__left {{prefix}}-class-left">
-    <template
-      wx:if="{{_leftIcon}}"
-      is="icon"
-      data="{{tClass: classPrefix + '__left-icon ' + prefix + '-class-left-icon', ..._leftIcon }}"
+    <t-icon
+      wx:if="{{ leftIcon }}"
+      name="{{leftIcon}}"
+      t-class="{{classPrefix}}__left-icon {{prefix}}-class-left-icon"
     />
     <slot name="left-icon" />
     <t-image
@@ -25,8 +24,8 @@
     />
     <slot name="image" />
   </view>
-  <view class="{{classPrefix}}__title {{prefix}}-class-center">
-    <view class="{{classPrefix}}__title-text {{prefix}}-class-title">
+  <view class="{{classPrefix}}__title">
+    <view class="{{classPrefix}}__title-text  {{prefix}}-class-title">
       <block wx:if="{{ title }}"> {{ title}} </block>
       <slot name="title" />
       <block wx:if="{{required}}">
@@ -46,17 +45,13 @@
   </view>
 
   <view class="{{classPrefix}}__right {{prefix}}-class-right">
-    <template
-      wx:if="{{_arrow}}"
-      is="icon"
-      data="{{tClass: classPrefix + '__right-icon ' + prefix + '-class-right-icon', ..._arrow }}"
+    <t-icon
+      wx:if="{{ arrow }}"
+      name="chevron-right"
+      t-class="{{classPrefix}}__right-icon {{prefix}}-class-right-icon"
     />
     <block wx:else>
-      <template
-        wx:if="{{_rightIcon}}"
-        is="icon"
-        data="{{tClass: classPrefix + '__right-icon ' + prefix + '-class-right-icon', ..._rightIcon }}"
-      />
+      <t-icon name="{{rightIcon}}" t-class="{{classPrefix}}__right-icon {{prefix}}-class-right-icon" />
       <slot name="right-icon" />
     </block>
   </view>

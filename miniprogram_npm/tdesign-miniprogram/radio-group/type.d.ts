@@ -19,7 +19,7 @@ export interface TdRadioGroupProps<T = RadioValue> {
     };
     icon?: {
         type: null;
-        value?: 'circle' | 'line' | 'dot' | Array<string>;
+        value?: 'fill-circle' | 'stroke-line' | Array<string>;
     };
     keys?: {
         type: ObjectConstructor;
@@ -46,7 +46,5 @@ export declare type RadioOption = string | number | RadioOptionObj;
 export interface RadioOptionObj {
     label?: string;
     value?: string | number;
-    readonly?: boolean;
     disabled?: boolean;
-    allowUncheck?: boolean;
 }

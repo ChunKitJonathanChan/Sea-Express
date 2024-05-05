@@ -2,17 +2,14 @@ import { SuperComponent } from '../common/src/index';
 export default class ImageViewer extends SuperComponent {
     externalClasses: string[];
     properties: {
-        backgroundColor?: {
+        style?: {
             type: StringConstructor;
             value?: string;
         };
-        closeBtn?: {
-            type: null;
-            value?: string | boolean | object;
-        };
-        deleteBtn?: {
-            type: null;
-            value?: string | boolean | object;
+        backgroundColor?: {
+            type: StringConstructor;
+            optionalTypes: NumberConstructor[];
+            value?: string | number;
         };
         images?: {
             type: ArrayConstructor;
@@ -20,15 +17,19 @@ export default class ImageViewer extends SuperComponent {
         };
         initialIndex?: {
             type: NumberConstructor;
-            value?: Number;
+            value?: number;
         };
         showIndex?: {
             type: BooleanConstructor;
             value?: boolean;
         };
-        usingCustomNavbar?: {
-            type: BooleanConstructor;
-            value?: boolean;
+        deleteBtn?: {
+            type: null;
+            value?: string | boolean | object;
+        };
+        closeBtn?: {
+            type: null;
+            value?: string | boolean | object;
         };
         visible?: {
             type: BooleanConstructor;
@@ -45,9 +46,7 @@ export default class ImageViewer extends SuperComponent {
         currentSwiperIndex: number;
         windowHeight: number;
         windowWidth: number;
-        swiperStyle: {};
-        imagesStyle: {};
-        maskTop: number;
+        imagesShape: {};
     };
     options: {
         multipleSlots: boolean;
@@ -63,7 +62,6 @@ export default class ImageViewer extends SuperComponent {
         deleteBtn(v: any): void;
     };
     methods: {
-        calcMaskTop(): void;
         saveScreenSize(): void;
         calcImageDisplayStyle(imageWidth: any, imageHeight: any): {
             styleObj: {

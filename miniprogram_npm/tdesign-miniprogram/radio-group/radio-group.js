@@ -39,7 +39,7 @@ let RadioGroup = class RadioGroup extends SuperComponent {
         ];
         this.observers = {
             value(v) {
-                this.getChildren().forEach((item) => {
+                this.getChilds().forEach((item) => {
                     item.setData({
                         checked: v === item.data.value,
                     });
@@ -48,19 +48,9 @@ let RadioGroup = class RadioGroup extends SuperComponent {
             options() {
                 this.initWithOptions();
             },
-            disabled(v) {
-                var _a;
-                if ((_a = this.data.options) === null || _a === void 0 ? void 0 : _a.length) {
-                    this.initWithOptions();
-                    return;
-                }
-                this.getChildren().forEach((item) => {
-                    item.setDisabled(v);
-                });
-            },
         };
         this.methods = {
-            getChildren() {
+            getChilds() {
                 let items = this.$children;
                 if (!(items === null || items === void 0 ? void 0 : items.length)) {
                     items = this.selectAllComponents(`.${prefix}-radio-option`);
@@ -71,12 +61,11 @@ let RadioGroup = class RadioGroup extends SuperComponent {
                 this._trigger('change', { value });
             },
             handleRadioChange(e) {
-                const { checked } = e.detail;
-                const { value, index, allowUncheck } = e.target.dataset;
-                this._trigger('change', checked === false && allowUncheck ? { value: null, index } : { value, index });
+                const { value, index } = e.target.dataset;
+                this._trigger('change', { value, index });
             },
             initWithOptions() {
-                const { options, value, keys, disabled } = this.data;
+                const { options, value, keys } = this.data;
                 if (!(options === null || options === void 0 ? void 0 : options.length) || !Array.isArray(options)) {
                     this.setData({
                         radioOptions: [],
@@ -93,11 +82,10 @@ let RadioGroup = class RadioGroup extends SuperComponent {
                                 label: `${element}`,
                                 value: element,
                                 checked: value === element,
-                                disabled,
                             });
                         }
                         else if (typeName === 'object') {
-                            optionsValue.push(Object.assign(Object.assign({}, element), { label: element[(_a = keys === null || keys === void 0 ? void 0 : keys.label) !== null && _a !== void 0 ? _a : 'label'], value: element[(_b = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _b !== void 0 ? _b : 'value'], checked: value === element[(_c = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _c !== void 0 ? _c : 'value'], disabled: element.disabled || disabled }));
+                            optionsValue.push(Object.assign(Object.assign({}, element), { label: element[(_a = keys === null || keys === void 0 ? void 0 : keys.label) !== null && _a !== void 0 ? _a : 'label'], value: element[(_b = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _b !== void 0 ? _b : 'value'], checked: value === element[(_c = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _c !== void 0 ? _c : 'value'] }));
                         }
                     });
                     this.setData({

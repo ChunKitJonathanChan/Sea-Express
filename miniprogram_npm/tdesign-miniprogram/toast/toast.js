@@ -26,16 +26,6 @@ let Toast = class Toast extends SuperComponent {
             typeMapIcon: '',
         };
         this.properties = props;
-        this.lifetimes = {
-            detached() {
-                this.destroyed();
-            },
-        };
-        this.pageLifetimes = {
-            hide() {
-                this.hide();
-            },
-        };
         this.methods = {
             show(options) {
                 if (this.hideTimer)
@@ -67,8 +57,6 @@ let Toast = class Toast extends SuperComponent {
             },
             hide() {
                 var _a, _b;
-                if (!this.data.visible)
-                    return;
                 this.setData({ visible: false });
                 (_b = (_a = this.data) === null || _a === void 0 ? void 0 : _a.close) === null || _b === void 0 ? void 0 : _b.call(_a);
                 this.triggerEvent('close');
@@ -82,6 +70,9 @@ let Toast = class Toast extends SuperComponent {
             },
             loop() { },
         };
+    }
+    detached() {
+        this.destroyed();
     }
 };
 Toast = __decorate([

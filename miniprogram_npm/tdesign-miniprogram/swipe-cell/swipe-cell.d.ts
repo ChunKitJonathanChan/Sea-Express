@@ -11,15 +11,10 @@ export default class SwiperCell extends SuperComponent {
         closed: boolean;
         classPrefix: string;
     };
-    observers: {
-        'left, right'(): void;
-    };
-    lifetimes: {
-        attached(): void;
-        ready(): void;
-        detached(): void;
-    };
+    attached(): void;
+    ready(): void;
     setSwipeWidth(): void;
+    detached(): void;
     open(): void;
     close(): void;
     closeOther(): void;

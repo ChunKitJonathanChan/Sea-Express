@@ -18,7 +18,8 @@ export default class CollapsePanel extends SuperComponent {
         ultimateDisabled: boolean;
     };
     methods: {
-        updateExpanded(activeValues?: any[]): void;
+        set(data: Record<string, object | any>): Promise<unknown>;
+        updateExpanded(activeValues: any): void;
         updateStyle(expanded: boolean): Promise<void>;
         onClick(): void;
     };

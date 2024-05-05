@@ -36,18 +36,9 @@ let StepItem = class StepItem extends SuperComponent {
             curStatus: '',
             layout: 'vertical',
             isLastChild: false,
-            sequence: 'positive',
-        };
-        this.observers = {
-            status(value) {
-                const { curStatus } = this.data;
-                if (curStatus === '' || value === curStatus)
-                    return;
-                this.setData({ curStatus: value });
-            },
         };
         this.methods = {
-            updateStatus({ current, currentStatus, index, theme, layout, items, sequence }) {
+            updateStatus(current, currentStatus, index, theme, layout, steps) {
                 let curStatus = this.data.status;
                 if (curStatus === 'default') {
                     if (index < Number(current)) {
@@ -63,8 +54,7 @@ let StepItem = class StepItem extends SuperComponent {
                     isDot: theme === 'dot',
                     layout,
                     theme,
-                    sequence,
-                    isLastChild: index === (sequence === 'positive' ? items.length - 1 : 0),
+                    isLastChild: steps.length - 1 === index,
                 });
             },
             onTap() {

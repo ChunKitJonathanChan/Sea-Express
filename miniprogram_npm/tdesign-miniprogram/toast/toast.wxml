@@ -28,10 +28,9 @@
   </view>
 </view>
 <t-overlay
-  style="{{ overlayProps && overlayProps.style || ''}}"
+  style="{{ overlayProps.style || ''}}"
   visible="{{realVisible && (showOverlay || preventScrollThrough)}}"
-  z-index="{{overlayProps && overlayProps.zIndex || 11000}}"
-  duration="{{overlayProps && overlayProps.duration || 300}}"
-  backgroundColor="{{preventScrollThrough ? 'transparent' : overlayProps && overlayProps.backgroundColor || ''}}"
-  preventScrollThrough="{{preventScrollThrough || overlayProps && overlayProps.preventScrollThrough}}"
+  z-index="{{overlayProps.zIndex || 11000}}"
+  backgroundColor="{{preventScrollThrough ? 'transparent' : overlayProps.backgroundColor || ''}}"
+  preventScrollThrough="{{preventScrollThrough || overlayProps.preventScrollThrough}}"
 />

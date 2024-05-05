@@ -1,12 +1,6 @@
-<import src="../common/template/icon.wxml" />
 <wxs src="../common/utils.wxs" module="_" />
 
-<view
-  style="{{_._style([style, customStyle])}}"
-  class="{{ classPrefix }} class {{prefix}}-class"
-  id="t-bar"
-  catchtouchmove="{{activeIdx === -1?'':'noop'}}"
->
+<view style="{{_._style([style, customStyle])}}" class="{{ classPrefix }} class {{prefix}}-class" id="t-bar">
   <view
     wx:for="{{menus}}"
     wx:key="index"
@@ -19,9 +13,10 @@
     aria-haspopup="menu"
   >
     <view class="{{classPrefix}}__title {{prefix}}-class-label">{{item.label}}</view>
-    <template
-      is="icon"
-      data="{{..._arrowIcon, ariaHidden: true, tClass: classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'}}"
+    <t-icon
+      name="caret-down-small"
+      t-class="{{classPrefix}}__icon {{classPrefix}}__icon--{{activeIdx == index ? 'active' : ''}} {{prefix}}-class-icon"
+      aria-hidden="{{true}}"
     />
   </view>
   <slot />

@@ -17,16 +17,13 @@ let Button = class Button extends SuperComponent {
         this.externalClasses = [`${prefix}-class`, `${prefix}-class-icon`, `${prefix}-class-loading`];
         this.behaviors = canIUseFormFieldButton() ? ['wx://form-field-button'] : [];
         this.properties = props;
-        this.options = {
-            multipleSlots: true,
-        };
         this.data = {
             prefix,
             className: '',
             classPrefix: name,
         };
         this.observers = {
-            'theme, size, plain, block, shape, disabled, loading, variant'() {
+            'theme, size, plain, block, shape, disabled, loading'() {
                 this.setClass();
             },
             icon(icon) {
@@ -83,11 +80,8 @@ let Button = class Button extends SuperComponent {
             chooseavatar(e) {
                 this.triggerEvent('chooseavatar', e.detail);
             },
-            agreeprivacyauthorization(e) {
-                this.triggerEvent('agreeprivacyauthorization', e.detail);
-            },
             handleTap(e) {
-                if (this.data.disabled || this.data.loading)
+                if (this.data.disabled)
                     return;
                 this.triggerEvent('tap', e);
             },

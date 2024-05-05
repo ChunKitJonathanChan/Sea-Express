@@ -1,6 +1,6 @@
 const props = {
     closable: {
-        type: null,
+        type: Boolean,
         value: false,
     },
     disabled: {

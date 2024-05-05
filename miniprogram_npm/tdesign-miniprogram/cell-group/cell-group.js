@@ -16,6 +16,9 @@ let CellGroup = class CellGroup extends SuperComponent {
         this.relations = {
             '../cell/cell': {
                 type: 'child',
+                linked() {
+                    this.updateLastChid();
+                },
             },
         };
         this.options = {
@@ -25,11 +28,6 @@ let CellGroup = class CellGroup extends SuperComponent {
         this.data = {
             prefix,
             classPrefix: name,
-        };
-        this.lifetimes = {
-            ready() {
-                this.updateLastChid();
-            },
         };
         this.methods = {
             updateLastChid() {

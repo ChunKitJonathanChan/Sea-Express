@@ -3,6 +3,10 @@ export interface TdSwiperNavProps {
         type: NumberConstructor;
         value?: number;
     };
+    style?: {
+        type: StringConstructor;
+        value?: string;
+    };
     direction?: {
         type: StringConstructor;
         value?: 'horizontal' | 'vertical';

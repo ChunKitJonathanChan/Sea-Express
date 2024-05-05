@@ -3,7 +3,7 @@
 
 <view
   style="{{_._style([style, customStyle])}}"
-  class="{{_.cls(classPrefix, [['top', label || scaleTextArray.length], ['disabled', disabled], ['range', range]])}} class {{prefix}}-class {{vertical ? classPrefix + '--vertical' : ''}}"
+  class="{{_.cls(classPrefix, [['top', label || scaleTextArray.length], ['disabled', disabled], ['range', range]])}} class {{prefix}}-class"
 >
   <block wx:if="{{!range}}">
     <text wx:if="{{showExtremeValue}}" class="{{classPrefix}}__value {{classPrefix}}__value--min">
@@ -19,25 +19,24 @@
           class="{{_.cls(classPrefix + '__scale-item', [['active', _value >= item.val], ['disabled', disabled], theme, ['hidden', (index == 0 || index == scaleArray.length - 1) && theme == 'capsule' || value == item.val]])}}"
           wx:for="{{scaleArray}}"
           wx:key="index"
-          style="{{vertical ? 'top' :  'left'}}:{{item.left}}px; {{vertical ? 'transform: translate(-50%, -50%);' : 'transform: translateX(-50%);'}}"
+          style="left:{{item.left}}px; transform: translateX(-50%);"
           aria-hidden="{{true}}"
         >
-          <view wx:if="{{scaleTextArray.length}}" class="{{_.cls(classPrefix + '__scale-desc', [theme])}}">
+          <view wx:if="{{scaleTextArray.length}}" class="{{_.cls(classPrefix + '__scale-desc', [theme])}}}}">
             {{scaleTextArray[index]}}
           </view>
         </view>
       </block>
       <view
         class="{{_.cls(classPrefix + '__line', [['disabled', disabled], theme, 'single'])}} {{prefix}}-class-bar-active"
-        style="{{vertical ? 'height' : 'width'}}: {{lineBarWidth}}"
+        style="width: {{lineBarWidth}}"
       >
         <view
           id="singleDot"
           class="{{classPrefix}}__dot {{prefix}}-class-cursor"
-          catch:touchstart="onTouchStart"
-          catch:touchmove="onSingleLineTap"
-          catch:touchend="onTouchEnd"
-          catch:touchcancel="onTouchEnd"
+          bind:touchmove="onSingleLineTap"
+          bind:touchend="onTouchEnd"
+          bind:touchcancel="onTouchEnd"
         >
           <view
             wx:if="{{label || isVisibleToScreenReader}}"
@@ -83,7 +82,7 @@
           wx:for="{{scaleArray}}"
           wx:for-index="index"
           wx:key="index"
-          style="{{vertical ? 'top' :  'left'}}:{{item.left}}px; {{vertical ? 'transform: translate(-50%, -50%);' : 'transform: translateX(-50%);'}}"
+          style="left: {{item.left}}px; transform: translateX(-50%)"
           aria-hidden="{{true}}"
         >
           <view wx:if="{{scaleTextArray.length}}" class="{{_.cls(classPrefix + '__scale-desc', [theme])}}"
@@ -93,14 +92,13 @@
       </block>
       <view
         class="{{_.cls(classPrefix + '__line', [['disabled', disabled], theme])}} {{prefix}}-class-bar-active"
-        style="{{vertical ? 'top' : 'left'}}: {{lineLeft}}px; {{vertical ? 'bottom' : 'right'}}: {{lineRight}}px"
+        style="left: {{lineLeft}}px; right: {{lineRight}}px"
       >
         <view
           id="leftDot"
-          catch:touchstart="onTouchStart"
-          catch:touchmove="onTouchMoveLeft"
-          catch:touchend="onTouchEnd"
-          catch:touchcancel="onTouchEnd"
+          bind:touchmove="onTouchMoveLeft"
+          bind:touchend="onTouchEnd"
+          bind:touchcancel="onTouchEnd"
           class="{{classPrefix}}__dot {{classPrefix}}__dot--left {{prefix}}-class-cursor"
         >
           <view
@@ -124,10 +122,9 @@
         </view>
         <view
           id="rightDot"
-          catch:touchstart="onTouchStart"
-          catch:touchmove="onTouchMoveRight"
-          catch:touchend="onTouchEnd"
-          catch:touchcancel="onTouchEnd"
+          bind:touchmove="onTouchMoveRight"
+          bind:touchend="onTouchEnd"
+          bind:touchcancel="onTouchEnd"
           class="{{classPrefix}}__dot {{classPrefix}}__dot--right {{prefix}}-class-cursor"
         >
           <view

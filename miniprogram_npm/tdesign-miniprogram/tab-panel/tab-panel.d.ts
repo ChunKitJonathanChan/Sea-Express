@@ -2,9 +2,6 @@ import { SuperComponent, RelationsOptions } from '../common/src/index';
 export default class TabPanel extends SuperComponent {
     externalClasses: string[];
     relations: RelationsOptions;
-    options: {
-        multipleSlots: boolean;
-    };
     properties: import("./type").TdTabPanelProps;
     data: {
         prefix: string;

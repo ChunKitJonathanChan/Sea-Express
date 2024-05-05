@@ -11,6 +11,10 @@ export interface TdBadgeProps {
         type: null;
         value?: string | number;
     };
+    style?: {
+        type: StringConstructor;
+        value?: string;
+    };
     dot?: {
         type: BooleanConstructor;
         value?: boolean;
@@ -29,7 +33,7 @@ export interface TdBadgeProps {
     };
     shape?: {
         type: StringConstructor;
-        value?: 'circle' | 'square' | 'bubble' | 'ribbon';
+        value?: 'circle' | 'round' | 'ribbon' | 'bubble';
     };
     showZero?: {
         type: BooleanConstructor;
@@ -37,6 +41,6 @@ export interface TdBadgeProps {
     };
     size?: {
         type: StringConstructor;
-        value?: 'medium' | 'large';
+        value?: 'small' | 'medium';
     };
 }

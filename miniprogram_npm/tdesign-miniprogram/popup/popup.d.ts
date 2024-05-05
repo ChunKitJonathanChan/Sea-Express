@@ -13,6 +13,7 @@ export default class Popup extends SuperComponent {
         classPrefix: string;
     };
     methods: {
+        onStopPropagation(): void;
         handleOverlayClick(): void;
         handleClose(): void;
     };

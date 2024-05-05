@@ -16,9 +16,6 @@ const props = {
     header: {
         type: String,
     },
-    headerLeftIcon: {
-        type: String,
-    },
     headerRightContent: {
         type: String,
     },

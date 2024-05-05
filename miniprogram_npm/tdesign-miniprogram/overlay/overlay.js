@@ -40,7 +40,7 @@ let Overlay = class Overlay extends SuperComponent {
         this.observers = {
             backgroundColor(v) {
                 this.setData({
-                    computedStyle: v ? `background-color: ${v};` : '',
+                    computedStyle: `background-color: ${v};`,
                 });
             },
             zIndex(v) {

@@ -3,13 +3,6 @@ function getPopupStyles(zIndex) {
   return zIndexStyle;
 }
 
-function onContentTouchMove (e) {
-  if (e.target.dataset.prevention) {
-    return false;
-  };
-}
-
 module.exports = {
   getPopupStyles: getPopupStyles,
-  onContentTouchMove: onContentTouchMove
 };

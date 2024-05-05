@@ -26,27 +26,40 @@ let Image = class Image extends SuperComponent {
             classPrefix: name,
         };
         this.preSrc = '';
+        this.lifetimes = {
+            attached() {
+                const { width, height } = this.data;
+                let innerStyle = '';
+                this.update();
+                if (width) {
+                    innerStyle += `width: ${addUnit(width)};`;
+                }
+                if (height) {
+                    innerStyle += `height: ${addUnit(height)};`;
+                }
+                this.setData({
+                    innerStyle,
+                });
+            },
+        };
         this.observers = {
             src() {
                 if (this.preSrc === this.properties.src)
                     return;
                 this.update();
             },
-            'width, height'(width, height) {
-                this.calcSize(width, height);
-            },
         };
         this.methods = {
             onLoaded(e) {
                 const sdkVersion = wx.getSystemInfoSync().SDKVersion;
                 const versionArray = sdkVersion.split('.').map((v) => parseInt(v, 10));
-                const { mode, tId } = this.properties;
+                const { mode } = this.properties;
                 const isInCompatible = versionArray[0] < 2 ||
                     (versionArray[0] === 2 && versionArray[1] < 10) ||
                     (versionArray[0] === 2 && versionArray[1] === 10 && versionArray[2] < 3);
                 if (mode === 'heightFix' && isInCompatible) {
                     const { height: picHeight, width: picWidth } = e.detail;
-                    getRect(this, `#${tId !== null && tId !== void 0 ? tId : 'image'}`).then((rect) => {
+                    getRect(this, '#image').then((rect) => {
                         const { height } = rect;
                         const resultWidth = ((height / picHeight) * picWidth).toFixed(2);
                         this.setData({ innerStyle: `height: ${addUnit(height)}; width: ${resultWidth}px;` });
@@ -64,18 +77,6 @@ let Image = class Image extends SuperComponent {
                     isFailed: true,
                 });
                 this.triggerEvent('error', e.detail);
-            },
-            calcSize(width, height) {
-                let innerStyle = '';
-                if (width) {
-                    innerStyle += `width: ${addUnit(width)};`;
-                }
-                if (height) {
-                    innerStyle += `height: ${addUnit(height)};`;
-                }
-                this.setData({
-                    innerStyle,
-                });
             },
             update() {
                 const { src } = this.properties;

@@ -27,9 +27,9 @@ export interface TdStepsProps {
         type: StringConstructor;
         value?: 'line' | 'dashed' | 'arrow';
     };
-    sequence?: {
+    style?: {
         type: StringConstructor;
-        value?: 'positive' | 'reverse';
+        value?: string;
     };
     theme?: {
         type: StringConstructor;

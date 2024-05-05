@@ -2,6 +2,7 @@ import { SuperComponent, RelationsOptions } from '../common/src/index';
 export default class Radio extends SuperComponent {
     externalClasses: string[];
     behaviors: string[];
+    parent: any;
     relations: RelationsOptions;
     options: {
         multipleSlots: boolean;
@@ -45,10 +46,6 @@ export default class Radio extends SuperComponent {
         style?: {
             type: StringConstructor;
             value?: string;
-        };
-        readonly?: {
-            type: BooleanConstructor;
-            value?: boolean;
         };
         disabled?: {
             type: BooleanConstructor;
@@ -94,16 +91,11 @@ export default class Radio extends SuperComponent {
         slotIcon: boolean;
         optionLinked: boolean;
         iconVal: any[];
-        _placement: string;
-        _disabled: boolean;
-    };
-    observers: {
-        disabled(v: any): void;
     };
     methods: {
         handleTap(e: any): void;
         doChange(): void;
-        init(): void;
+        initStatus(): void;
         setDisabled(disabled: Boolean): void;
     };
 }

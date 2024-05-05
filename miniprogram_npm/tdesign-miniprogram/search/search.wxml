@@ -2,7 +2,7 @@
 
 <view style="{{_._style([style, customStyle])}}" class="class {{classPrefix}} {{prefix}}-class">
   <view
-    class="{{classPrefix}}__input-box {{prefix}}-{{focus ? 'is-focused' : 'not-focused'}} {{classPrefix}}__input-box--{{center ? 'center' : ''}} {{classPrefix}}__input-box--{{shape}} {{prefix}}-class-input-container"
+    class="{{classPrefix}}__input-box {{prefix}}-{{localValue.focus ? 'is-focused' : 'not-focused'}} {{classPrefix}}__input-box--{{center ? 'center' : ''}} {{classPrefix}}__input-box--{{shape}} {{prefix}}-class-input-container"
   >
     <!-- <view wx:if="{{label}}" class="{{classPrefix}}__label {{prefix}}-class-label">{{label}}</view>
     <slot name="label" /> -->
@@ -13,28 +13,17 @@
       class="{{prefix}}-icon {{prefix}}-class-left"
       aria-hidden="{{true}}"
     />
-    <slot wx:else name="left-icon" />
-
+    <slot name="left-icon" />
     <input
-      type="{{type}}"
+      type="text"
       name="input"
-      maxlength="{{maxlength}}"
       disabled="{{disabled}}"
       class="{{prefix}}-input__keyword {{prefix}}-class-input"
-      focus="{{focus}}"
+      focus="{{localValue.focus}}"
       value="{{value}}"
-      confirm-type="{{confirmType}}"
-      confirm-hold="{{confirmHold}}"
-      cursor="{{cursor}}"
-      adjust-position="{{adjustPosition}}"
-      always-embed="{{alwaysEmbed}}"
-      selection-start="{{selectionStart}}"
-      selection-end="{{selectionEnd}}"
-      hold-keyboard="{{holdKeyboard}}"
-      cursor-spacing="{{cursorSpacing}}"
+      confirm-type="search"
       placeholder="{{placeholder}}"
-      placeholder-style="{{placeholderStyle}}"
-      placeholder-class="{{placeholderClass}} {{classPrefix}}__placeholder {{classPrefix}}__placeholder--{{center ? 'center': 'normal'}}"
+      placeholder-class="{{classPrefix}}__placeholder {{classPrefix}}__placeholder--{{center ? 'center': 'normal'}}"
       bind:input="onInput"
       bind:focus="onFocus"
       bind:blur="onBlur"
@@ -43,7 +32,7 @@
     <view
       wx:if="{{value !=='' && clearable}}"
       class="{{classPrefix}}__clear {{prefix}}-class-clear"
-      catch:tap="handleClear"
+      bind:tap="handleClear"
       aria-role="button"
       aria-label="清除"
     >
@@ -53,10 +42,10 @@
   <view
     wx:if="{{action}}"
     class="{{classPrefix}}__search-action {{prefix}}-class-action"
-    catch:tap="onActionClick"
+    bindtap="onActionClick"
     aria-role="button"
   >
     {{action}}
   </view>
-  <slot wx:else name="action" />
+  <slot name="action" />
 </view>

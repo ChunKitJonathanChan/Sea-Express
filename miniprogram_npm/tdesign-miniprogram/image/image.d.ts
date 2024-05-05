@@ -13,14 +13,15 @@ export default class Image extends SuperComponent {
         classPrefix: string;
     };
     preSrc: string;
+    lifetimes: {
+        attached(): void;
+    };
     observers: {
         src(): void;
-        'width, height'(width: any, height: any): void;
     };
     methods: {
         onLoaded(e: any): void;
         onLoadError(e: any): void;
-        calcSize(width: any, height: any): void;
         update(): void;
     };
 }

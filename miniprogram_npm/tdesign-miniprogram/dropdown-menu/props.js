@@ -1,8 +1,4 @@
 const props = {
-    arrowIcon: {
-        type: null,
-        value: 'caret-down-small',
-    },
     closeOnClickOverlay: {
         type: Boolean,
         value: true,

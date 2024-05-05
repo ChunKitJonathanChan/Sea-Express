@@ -1,7 +1,7 @@
 import { SuperComponent, RelationsOptions } from '../common/src/index';
 export default class SideBar extends SuperComponent {
     externalClasses: string[];
-    children: any[];
+    childs: any[];
     relations: RelationsOptions;
     controlledProps: {
         key: string;

@@ -91,15 +91,11 @@ export const getRect = function (context, selector, needAll = false) {
             .exec();
     });
 };
+const isDef = function (value) {
+    return value !== undefined && value !== null;
+};
 export const isNumber = function (value) {
     return /^\d+(\.\d+)?$/.test(value);
-};
-export const isNull = function (value) {
-    return value === null;
-};
-export const isUndefined = (value) => typeof value === 'undefined';
-export const isDef = function (value) {
-    return !isUndefined(value) && !isNull(value);
 };
 export const addUnit = function (value) {
     if (!isDef(value)) {
@@ -108,9 +104,8 @@ export const addUnit = function (value) {
     value = String(value);
     return isNumber(value) ? `${value}px` : value;
 };
-export const getCharacterLength = (type, char, max) => {
-    const str = String(char !== null && char !== void 0 ? char : '');
-    if (str.length === 0) {
+export const getCharacterLength = (type, str, max) => {
+    if (!str || str.length === 0) {
         return {
             length: 0,
             characters: '',
@@ -173,7 +168,7 @@ export const unitConvert = (value) => {
         }
         return parseInt(value, 10);
     }
-    return value !== null && value !== void 0 ? value : 0;
+    return value;
 };
 export const setIcon = (iconName, icon, defaultIcon) => {
     if (icon) {
@@ -221,18 +216,4 @@ export const calcIcon = (icon, defaultIcon) => {
         return icon;
     }
     return null;
-};
-export const isOverSize = (size, sizeLimit) => {
-    var _a;
-    if (!sizeLimit)
-        return false;
-    const base = 1000;
-    const unitMap = {
-        B: 1,
-        KB: base,
-        MB: base * base,
-        GB: base * base * base,
-    };
-    const computedSize = typeof sizeLimit === 'number' ? sizeLimit * base : (sizeLimit === null || sizeLimit === void 0 ? void 0 : sizeLimit.size) * unitMap[(_a = sizeLimit === null || sizeLimit === void 0 ? void 0 : sizeLimit.unit) !== null && _a !== void 0 ? _a : 'KB'];
-    return size > computedSize;
 };

@@ -1,7 +1,7 @@
 const props = {
     placement: {
         type: String,
-        value: 'left',
+        value: null,
     },
     borderless: {
         type: Boolean,
@@ -13,7 +13,7 @@ const props = {
     },
     icon: {
         type: null,
-        value: 'circle',
+        value: 'fill-circle',
     },
     keys: {
         type: Object,

@@ -19,63 +19,11 @@ export interface TdSearchProps {
         type: ArrayConstructor;
         value?: ['t-class', 't-class-input', 't-class-input-container', 't-class-cancel', 't-class-left', 't-class-right'];
     };
-    cursorSpacing?: {
-        type: NumberConstructor;
-        value?: number;
-    };
     focus?: {
         type: BooleanConstructor;
         value?: boolean;
     };
     label?: {
-        type: StringConstructor;
-        value?: string;
-    };
-    maxcharacter?: {
-        type: NumberConstructor;
-        value?: number;
-    };
-    maxlength?: {
-        type: NumberConstructor;
-        value?: number;
-    };
-    confirmType?: {
-        type: StringConstructor;
-        value?: 'send' | 'search' | 'next' | 'go' | 'done';
-    };
-    alwaysEmbed?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
-    confirmHold?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
-    cursor: {
-        type: NumberConstructor;
-        value?: number;
-    };
-    selectionStart?: {
-        type: NumberConstructor;
-        value?: number;
-    };
-    selectionEnd?: {
-        type: NumberConstructor;
-        value?: number;
-    };
-    adjustPosition?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
-    holdKeyboard?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
-    placeholderStyle: {
-        type: StringConstructor;
-        value?: string;
-    };
-    placeholderClass?: {
         type: StringConstructor;
         value?: string;
     };
@@ -102,9 +50,5 @@ export interface TdSearchProps {
     clearable: {
         type: BooleanConstructor;
         value?: boolean;
-    };
-    type: {
-        type: StringConstructor;
-        value?: string;
     };
 }

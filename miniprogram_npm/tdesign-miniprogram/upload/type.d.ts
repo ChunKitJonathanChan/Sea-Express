@@ -12,10 +12,6 @@ export interface TdUploadProps {
         type: ObjectConstructor;
         value?: UploadMpConfig;
     };
-    disabled?: {
-        type: BooleanConstructor;
-        value?: boolean;
-    };
     style?: {
         type: StringConstructor;
         value?: string;
@@ -64,14 +60,6 @@ export interface TdUploadProps {
         type: StringConstructor;
         value?: 'media' | 'messageFile';
     };
-    draggable?: {
-        type: null;
-        value?: boolean | Draggable;
-    };
-    transition?: {
-        type: ObjectConstructor;
-        value: Transition;
-    };
 }
 export declare type UploadMpConfig = ImageConfig | VideoConfig;
 export interface ImageConfig {
@@ -100,7 +88,6 @@ export interface UploadFile {
     type?: 'image' | 'video';
     percent?: number;
     status: 'loading' | 'reload' | 'failed' | 'done';
-    thumb?: string;
 }
 export declare type MediaType = 'image' | 'video';
 export interface SizeLimitObj {
@@ -110,12 +97,3 @@ export interface SizeLimitObj {
 }
 export declare type SizeUnitArray = ['B', 'KB', 'MB', 'GB'];
 export declare type SizeUnit = SizeUnitArray[number];
-export interface Draggable {
-    vibrate?: boolean;
-    collisionVibrate?: boolean;
-}
-export interface Transition {
-    backTransition?: boolean;
-    duration?: number;
-    timingFunction?: string;
-}

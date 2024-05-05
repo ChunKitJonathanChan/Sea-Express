@@ -7,16 +7,11 @@ export default class Picker extends SuperComponent {
     };
     relations: RelationsOptions;
     observers: {
-        'value, visible'(): void;
-        keys(obj: any): void;
+        value(): void;
     };
     data: {
         prefix: string;
         classPrefix: string;
-        labelAlias: string;
-        valueAlias: string;
-        defaultPopUpProps: {};
-        defaultPopUpzIndex: number;
     };
     methods: {
         updateChildren(): void;

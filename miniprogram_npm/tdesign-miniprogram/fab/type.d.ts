@@ -15,9 +15,4 @@ export interface TdFabProps {
         type: StringConstructor;
         value?: string;
     };
-    draggable?: {
-        type: BooleanConstructor;
-        optionalTypes: Array<StringConstructor>;
-        value?: boolean | 'all' | 'vertical' | 'horizontal';
-    };
 }

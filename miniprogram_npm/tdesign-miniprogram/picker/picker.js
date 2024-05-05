@@ -26,32 +26,21 @@ let Picker = class Picker extends SuperComponent {
             },
         };
         this.observers = {
-            'value, visible'() {
+            value() {
                 this.updateChildren();
-            },
-            keys(obj) {
-                this.setData({
-                    labelAlias: (obj === null || obj === void 0 ? void 0 : obj.label) || 'label',
-                    valueAlias: (obj === null || obj === void 0 ? void 0 : obj.value) || 'value',
-                });
             },
         };
         this.data = {
             prefix,
             classPrefix: name,
-            labelAlias: 'label',
-            valueAlias: 'value',
-            defaultPopUpProps: {},
-            defaultPopUpzIndex: 11500,
         };
         this.methods = {
             updateChildren() {
-                const { value, defaultValue } = this.properties;
+                const { value } = this.properties;
                 this.$children.forEach((child, index) => {
-                    var _a, _b;
                     child.setData({
-                        value: (_b = (_a = value === null || value === void 0 ? void 0 : value[index]) !== null && _a !== void 0 ? _a : defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue[index]) !== null && _b !== void 0 ? _b : '',
-                        columnIndex: index,
+                        value: (value === null || value === void 0 ? void 0 : value[index]) || '',
+                        siblingCount: this.$children.length,
                     });
                     child.update();
                 });

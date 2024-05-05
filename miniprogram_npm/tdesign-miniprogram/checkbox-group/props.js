@@ -1,10 +1,11 @@
 const props = {
-    borderless: {
-        type: Boolean,
-        value: false,
+    style: {
+        type: String,
+        value: '',
     },
     disabled: {
         type: Boolean,
+        value: false,
     },
     max: {
         type: Number,

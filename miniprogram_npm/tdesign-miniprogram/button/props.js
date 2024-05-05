@@ -1,8 +1,4 @@
 const props = {
-    tId: {
-        type: String,
-        value: '',
-    },
     block: {
         type: Boolean,
         value: false,
@@ -55,10 +51,6 @@ const props = {
     },
     openType: {
         type: String,
-    },
-    hoverClass: {
-        type: String,
-        value: '',
     },
     hoverStopPropagation: {
         type: Boolean,

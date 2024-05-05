@@ -26,17 +26,13 @@ let CheckBox = class CheckBox extends SuperComponent {
                 linked(parent) {
                     const { value, disabled, borderless } = parent.data;
                     const valueSet = new Set(value);
-                    const checkedFromParent = valueSet.has(this.data.value);
                     const data = {
-                        _disabled: this.data.disabled == null ? disabled : this.data.disabled,
+                        disabled: disabled || this.data.disabled,
                     };
                     if (borderless) {
                         data.borderless = true;
                     }
-                    data.checked = this.data.checked || checkedFromParent;
-                    if (this.data.checked) {
-                        parent.updateValue(this.data);
-                    }
+                    data.checked = valueSet.has(this.data.value);
                     if (this.data.checkAll) {
                         data.checked = valueSet.size > 0;
                     }
@@ -50,16 +46,13 @@ let CheckBox = class CheckBox extends SuperComponent {
         this.properties = Object.assign(Object.assign({}, Props), { theme: {
                 type: String,
                 value: 'default',
+            }, borderless: {
+                type: Boolean,
+                value: false,
             } });
         this.data = {
             prefix,
             classPrefix: name,
-            _disabled: false,
-        };
-        this.observers = {
-            disabled(v) {
-                this.setData({ _disabled: v });
-            },
         };
         this.controlledProps = [
             {
@@ -68,25 +61,23 @@ let CheckBox = class CheckBox extends SuperComponent {
             },
         ];
         this.methods = {
-            handleTap(e) {
-                const { _disabled, readonly, contentDisabled } = this.data;
-                const { target } = e.currentTarget.dataset;
-                if (_disabled || readonly || (target === 'text' && contentDisabled))
+            onChange(e) {
+                const { disabled, readonly } = this.data;
+                if (disabled || readonly)
                     return;
-                const { value, label } = this.data;
+                const { target } = e.currentTarget.dataset;
+                const { contentDisabled } = this.data;
+                if (target === 'text' && contentDisabled) {
+                    return;
+                }
                 const checked = !this.data.checked;
                 const parent = this.$parent;
                 if (parent) {
                     parent.updateValue(Object.assign(Object.assign({}, this.data), { checked }));
                 }
                 else {
-                    this._trigger('change', { context: { value, label }, checked });
+                    this._trigger('change', { checked });
                 }
-            },
-            setDisabled(disabled) {
-                this.setData({
-                    _disabled: this.data.disabled || disabled,
-                });
             },
         };
     }

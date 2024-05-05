@@ -46,9 +46,5 @@ const props = {
         type: null,
         value: 0,
     },
-    vertical: {
-        type: Boolean,
-        value: false,
-    },
 };
 export default props;

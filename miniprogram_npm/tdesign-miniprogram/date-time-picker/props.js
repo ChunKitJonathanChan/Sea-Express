@@ -7,10 +7,6 @@ const props = {
         type: String,
         value: '',
     },
-    customLocale: {
-        type: String,
-        value: 'zh',
-    },
     end: {
         type: null,
     },
@@ -19,7 +15,7 @@ const props = {
     },
     format: {
         type: String,
-        value: 'YYYY-MM-DD HH:mm:ss',
+        value: '',
     },
     header: {
         type: Boolean,
@@ -29,19 +25,12 @@ const props = {
         type: null,
         value: 'date',
     },
-    popupProps: {
-        type: Object,
-        value: {},
-    },
     showWeek: {
         type: Boolean,
         value: false,
     },
     start: {
         type: null,
-    },
-    steps: {
-        type: Object,
     },
     title: {
         type: String,

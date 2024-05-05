@@ -10,9 +10,6 @@ export default class CellGroup extends SuperComponent {
         prefix: string;
         classPrefix: string;
     };
-    lifetimes: {
-        ready(): void;
-    };
     methods: {
         updateLastChid(): void;
     };

@@ -10,10 +10,5 @@ const props = {
         type: String,
         value: '',
     },
-    draggable: {
-        type: Boolean,
-        optionalTypes: [String],
-        value: false,
-    },
 };
 export default props;

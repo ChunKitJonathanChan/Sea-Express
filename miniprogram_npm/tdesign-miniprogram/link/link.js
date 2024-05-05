@@ -21,9 +21,6 @@ let Link = class Link extends SuperComponent {
             `${prefix}-class-suffix-icon`,
         ];
         this.properties = props;
-        this.options = {
-            multipleSlots: true,
-        };
         this.data = {
             prefix,
             classPrefix: name,
@@ -55,8 +52,7 @@ let Link = class Link extends SuperComponent {
                 if (underline) {
                     classList.push(`${name}--underline`);
                 }
-                if ((navigatorProps && !navigatorProps.url && !['navigateBack', 'exit'].includes(navigatorProps.openType)) ||
-                    disabled) {
+                if ((navigatorProps && !navigatorProps.url) || disabled) {
                     classList.push(`${name}--disabled`);
                 }
                 this.setData({

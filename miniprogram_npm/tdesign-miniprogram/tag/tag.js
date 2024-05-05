@@ -23,6 +23,7 @@ let Tag = class Tag extends SuperComponent {
         this.externalClasses = [`${prefix}-class`];
         this.options = {
             multipleSlots: true,
+            styleIsolation: 'apply-shared',
         };
         this.lifetimes = {
             attached() {
@@ -40,11 +41,6 @@ let Tag = class Tag extends SuperComponent {
             icon(v) {
                 this.setData({
                     _icon: calcIcon(v),
-                });
-            },
-            closable(v) {
-                this.setData({
-                    _closable: calcIcon(v, 'close'),
                 });
             },
         };

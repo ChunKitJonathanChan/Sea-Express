@@ -12,10 +12,6 @@ const props = {
     operation: {
         type: String,
     },
-    interval: {
-        type: Number,
-        value: 2000,
-    },
     marquee: {
         type: null,
         value: false,

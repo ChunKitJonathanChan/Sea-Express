@@ -1,7 +1,7 @@
-export interface TdCheckboxGroupProps<T = CheckboxGroupValue> {
-    borderless?: {
-        type: BooleanConstructor;
-        value?: boolean;
+export interface TdCheckboxGroupProps {
+    style?: {
+        type: StringConstructor;
+        value?: string;
     };
     disabled?: {
         type: BooleanConstructor;
@@ -21,11 +21,11 @@ export interface TdCheckboxGroupProps<T = CheckboxGroupValue> {
     };
     value?: {
         type: ArrayConstructor;
-        value?: T;
+        value?: CheckboxGroupValue;
     };
     defaultValue?: {
         type: ArrayConstructor;
-        value?: T;
+        value?: CheckboxGroupValue;
     };
 }
 export declare type CheckboxOption = string | number | CheckboxOptionObj;
@@ -35,4 +35,4 @@ export interface CheckboxOptionObj {
     disabled?: boolean;
     checkAll?: true;
 }
-export declare type CheckboxGroupValue = Array<string | number | boolean>;
+export declare type CheckboxGroupValue = Array<string | number>;

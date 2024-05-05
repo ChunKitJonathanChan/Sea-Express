@@ -7,13 +7,45 @@ export default class CheckBoxGroup extends SuperComponent {
         classPrefix: string;
         checkboxOptions: any[];
     };
-    properties: import("./type").TdCheckboxGroupProps<import("./type").CheckboxGroupValue>;
+    properties: {
+        borderless: {
+            type: BooleanConstructor;
+            value: boolean;
+        };
+        style?: {
+            type: StringConstructor;
+            value?: string;
+        };
+        disabled?: {
+            type: BooleanConstructor;
+            value?: boolean;
+        };
+        max?: {
+            type: NumberConstructor;
+            value?: number;
+        };
+        name?: {
+            type: StringConstructor;
+            value?: string;
+        };
+        options?: {
+            type: ArrayConstructor;
+            value?: import("./type").CheckboxOption[];
+        };
+        value?: {
+            type: ArrayConstructor;
+            value?: import("./type").CheckboxGroupValue;
+        };
+        defaultValue?: {
+            type: ArrayConstructor;
+            value?: import("./type").CheckboxGroupValue;
+        };
+    };
     observers: {
         value(): void;
-        options(): void;
-        disabled(v: any): void;
     };
     lifetimes: {
+        attached(): void;
         ready(): void;
     };
     controlledProps: {
@@ -22,13 +54,12 @@ export default class CheckBoxGroup extends SuperComponent {
     }[];
     $checkAll: any;
     methods: {
-        getChildren(): any;
+        getChilds(): any;
         updateChildren(): void;
-        updateValue({ value, checked, checkAll, item, indeterminate }: {
+        updateValue({ value, checked, checkAll, indeterminate }: {
             value: any;
             checked: any;
             checkAll: any;
-            item: any;
             indeterminate: any;
         }): void;
         initWithOptions(): void;

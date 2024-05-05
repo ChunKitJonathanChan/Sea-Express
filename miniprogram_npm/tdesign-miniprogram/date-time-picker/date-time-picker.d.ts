@@ -20,7 +20,6 @@ export default class DateTimePicker extends SuperComponent {
     };
     observers: {
         'start, end, value': () => void;
-        customLocale(v: any): void;
         mode(m: any): void;
     };
     date: any;
@@ -30,8 +29,18 @@ export default class DateTimePicker extends SuperComponent {
         columns: any[];
         columnsValue: any[];
         fullModes: any[];
-        locale: any;
-        dayjsLocale: any;
+        locale: {
+            year: string;
+            month: string;
+            date: string;
+            hour: string;
+            minute: string;
+            second: string;
+            am: string;
+            pm: string;
+            confirm: string;
+            cancel: string;
+        };
     };
     controlledProps: {
         key: string;

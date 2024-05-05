@@ -2,14 +2,6 @@ const props = {
     externalClasses: {
         type: Array,
     },
-    visibilityHeight: {
-        type: Number,
-        value: 200,
-    },
-    scrollTop: {
-        type: Number,
-        value: 0,
-    },
     fixed: {
         type: Boolean,
         value: true,

@@ -8,7 +8,7 @@ const props = {
         value: false,
     },
     autosize: {
-        type: null,
+        type: Boolean,
         value: false,
     },
     confirmHold: {

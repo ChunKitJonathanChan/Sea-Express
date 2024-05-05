@@ -46,9 +46,10 @@ let Steps = class Steps extends SuperComponent {
         };
         this.methods = {
             updateChildren() {
+                const { current, currentStatus, readonly, theme, layout } = this.data;
                 const items = this.$children;
                 items.forEach((item, index) => {
-                    item.updateStatus(Object.assign({ index, items }, this.data));
+                    item.updateStatus(current, currentStatus, index, theme, layout, items, readonly);
                 });
             },
             updateLastChid() {

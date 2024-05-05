@@ -4,16 +4,19 @@
 
 <view style="{{_._style([style, customStyle])}}" class="{{classPrefix}} class">
   <view
+    aria-role="progressbar"
+    role="progressbar"
+    aria-valuenow="{{computedProgress}}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label="{{ ariaLabel || this.getAriaLabel(status) }}"
+    aria-labelledby="{{ ariaLabelledby }}"
+    aria-describedby="{{ ariaDescribedby }}"
+    aria-busy="{{ ariaBusy }}"
     wx:if="{{theme === this.PRO_THEME.LINE}}"
     class="{{classPrefix }}--thin {{classPrefix}}--status--{{status || computedStatus}} {{prefix}}-class"
   >
     <view
-      aria-role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="{{computedProgress}}"
-      aria-label="{{ ariaLabel || (isIOS ? this.getIOSAriaLabel(status) : this.getAndroidAriaLabel(status))  }}"
-      aria-live="polite"
       class="{{classPrefix }}__bar"
       style="height: {{heightBar}}px;border-radius: {{heightBar}}px;background-color: {{bgColorBar}}"
     >
@@ -22,8 +25,7 @@
         style="background: {{colorBar}}; width: {{computedProgress + '%'}}"
       ></view>
     </view>
-    <!-- aria-hidden=true 禁用掉额外的聚焦 -->
-    <view wx:if="{{label}}" class="{{classPrefix}}__info {{prefix}}-class-label" aria-hidden="{{ true }}">
+    <view wx:if="{{label}}" class="{{classPrefix}}__info {{prefix}}-class-label">
       <template
         wx:if="{{_.includes(this.STATUS, status)}}"
         is="icon"
@@ -31,17 +33,20 @@
       ></template>
       <text wx:else>{{ _.isString(label)? label: computedProgress + '%' }}</text>
     </view>
-    <slot name="label" />
+    <slot wx:else name="label" />
   </view>
 
   <view
+    wx:if="{{theme === this.PRO_THEME.PLUMP}}"
     aria-role="progressbar"
+    role="progressbar"
+    aria-valuenow="{{computedProgress}}"
     aria-valuemin="0"
     aria-valuemax="100"
-    aria-valuenow="{{computedProgress}}"
-    aria-label="{{ ariaLabel || (isIOS ? this.getIOSAriaLabel(status) : this.getAndroidAriaLabel(status))  }}"
-    aria-live="polite"
-    wx:if="{{theme === this.PRO_THEME.PLUMP}}"
+    aria-label="{{ ariaLabel || this.getAriaLabel(status) }}"
+    aria-labelledby="{{ ariaLabelledby }}"
+    aria-describedby="{{ ariaDescribedby }}"
+    aria-busy="{{ ariaBusy }}"
     class="{{classPrefix}}__bar {{classPrefix}}--plump {{computedProgress > 10 ? classPrefix + '--over-ten':  classPrefix + '--under-ten'}} {{classPrefix}}--status--{{status || computedStatus}} {{prefix}}-class"
     style="height: {{heightBar}}px;border-radius: {{heightBar}}px;background-color: {{bgColorBar}}"
   >
@@ -52,37 +57,36 @@
       <view wx:if="{{label && computedProgress > 10}}" class="{{classPrefix }}__info {{prefix}}-class-label">
         <text>{{ _.isString(label)? label: computedProgress + '%' }}</text>
       </view>
-      <slot name="label" />
+      <slot wx:else name="label" />
     </view>
-    <view
-      wx:if="{{label && computedProgress <= 10}}"
-      class="{{ classPrefix }}__info {{prefix}}-class-label"
-      aria-hidden="{{ true }}"
-    >
+    <view wx:if="{{label && computedProgress <= 10}}" class="{{ classPrefix }}__info {{prefix}}-class-label">
       <text>{{ _.isString(label)? label: computedProgress + '%' }}</text>
     </view>
-    <slot name="label" />
+    <slot wx:else name="label" />
   </view>
 
   <view
     wx:if="{{theme === this.PRO_THEME.CIRCLE}}"
+    aria-role="progressbar"
+    role="progressbar"
+    aria-valuenow="{{computedProgress}}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label="{{ ariaLabel || this.getAriaLabel(status)  }}"
+    aria-labelledby="{{ ariaLabelledby }}"
+    aria-describedby="{{ ariaDescribedby }}"
+    aria-busy="{{ ariaBusy }}"
     class="{{classPrefix}}--status--{{status || computedStatus}} {{prefix}}-class"
   >
     <view
-      aria-role="progressbar"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      aria-valuenow="{{computedProgress}}"
-      aria-label="{{ ariaLabel || (isIOS ? this.getIOSAriaLabel(status) : this.getAndroidAriaLabel(status))  }}"
-      aria-live="polite"
       class="{{classPrefix}}__canvas--circle"
-      style="background-image: conic-gradient( {{colorCircle || this.STATUS_COLOR[status] || '#0052d9'}} {{computedProgress}}%, {{bgColorBar || 'var(--td-bg-color-component)'}} 0%);"
+      style="background-image: conic-gradient( {{colorCircle || this.STATUS_COLOR[status] || '#0052d9'}} {{computedProgress}}%, {{bgColorBar || '#e7e7e7'}} 0%);"
     >
       <view
         class="{{classPrefix}}__canvas--inner {{prefix}}-class-bar"
         style="{{innerDiameter? 'width:'+ innerDiameter*2 + 'rpx;' + 'height:'+ innerDiameter*2 + 'rpx;': ''}}"
       >
-        <view wx:if="{{label}}" class="{{classPrefix}}__info {{prefix}}-class-label" aria-hidden="{{ true }}">
+        <view wx:if="{{label}}" class="{{classPrefix}}__info {{prefix}}-class-label">
           <template
             wx:if="{{_.includes(this.STATUS, status)}}"
             is="icon"
@@ -90,7 +94,7 @@
           ></template>
           <text wx:else>{{ _.isString(label)? label: computedProgress + '%' }}</text>
         </view>
-        <slot name="label" />
+        <slot wx:else name="label" />
       </view>
     </view>
   </view>

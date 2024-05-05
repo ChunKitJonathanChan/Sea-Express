@@ -9,17 +9,12 @@ var changeNumToStr = function (arr) {
 };
 
 var getMessageStyles = function (zIndex, offset, wrapTop) {
-  var arr = changeNumToStr(offset || [0, 0]);
-  var left = arr[1] || 0;
-  var right = arr[1] || 0;
-
-  var zIndexStyle = zIndex ? 'z-index:' + zIndex + ';' : '';
+  var arr = changeNumToStr(offset);
   var styleOffset = '';
-
-  styleOffset += 'top:' + wrapTop + 'px;';
-  styleOffset += 'left:' + left + ';';
-  styleOffset += 'right:' + right + ';';
-
+  styleOffset += 'top:' + changeNumToStr([wrapTop * 2]) + ';';
+  styleOffset += 'right:' + arr[1] + ';';
+  styleOffset += 'left:' + arr[1] + ';';
+  var zIndexStyle = zIndex ? 'z-index:' + zIndex + ';' : '';
   return zIndexStyle + styleOffset;
 };
 

@@ -1,6 +1,5 @@
 <template name="button">
   <t-button
-    t-id="{{tId || ''}}"
     block="{{block || false}}"
     class="{{class || ''}}"
     t-class="{{externalClass}}"
@@ -15,7 +14,6 @@
     size="{{size || 'medium'}}"
     variant="{{variant || 'base'}}"
     open-type="{{openType || ''}}"
-    hover-class="{{hoverClass || ''}}"
     hover-stop-propagation="{{hoverStopPropagation || false}}"
     hover-start-time="{{hoverStartTime || 20}}"
     hover-stay-time="{{hoverStayTime || 70}}"
@@ -33,7 +31,6 @@
     bind:error="onTplButtonTap"
     bind:opensetting="onTplButtonTap"
     bind:launchapp="onTplButtonTap"
-    bind:agreeprivacyauthorization="onTplButtonTap"
     aria-label="{{ariaLabel || ''}}"
     >{{content}}</t-button
   >

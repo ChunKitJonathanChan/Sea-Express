@@ -52,7 +52,7 @@ let GridItem = class GridItem extends SuperComponent {
             gridItemContentStyle: '',
             align: 'center',
             column: 0,
-            describedbyID: '',
+            labelID: '',
         };
         this.observers = {
             icon(icon) {
@@ -63,7 +63,7 @@ let GridItem = class GridItem extends SuperComponent {
         this.lifetimes = {
             ready() {
                 this.setData({
-                    describedbyID: getUniqueID(),
+                    labelID: getUniqueID(),
                 });
             },
         };

@@ -18,9 +18,6 @@ let TabPanel = class TabPanel extends SuperComponent {
                 type: 'ancestor',
             },
         };
-        this.options = {
-            multipleSlots: true,
-        };
         this.properties = props;
         this.data = {
             prefix,
@@ -51,7 +48,7 @@ let TabPanel = class TabPanel extends SuperComponent {
     render(active, parent) {
         this.setData({
             active,
-            hide: !parent.data.animation && !active,
+            hide: !parent.animated && !active,
         });
     }
 };

@@ -17,7 +17,6 @@ export default class Tag extends SuperComponent {
         'size, shape, theme, variant, closable, disabled'(): void;
         maxWidth(): void;
         icon(v: any): void;
-        closable(v: any): void;
     };
     methods: {
         setClass(): void;

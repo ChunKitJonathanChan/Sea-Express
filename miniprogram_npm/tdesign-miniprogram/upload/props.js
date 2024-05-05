@@ -9,10 +9,6 @@ const props = {
     config: {
         type: Object,
     },
-    disabled: {
-        type: Boolean,
-        value: false,
-    },
     files: {
         type: Array,
         value: null,
@@ -47,13 +43,6 @@ const props = {
     source: {
         type: String,
         value: 'media',
-    },
-    draggable: {
-        type: null,
-    },
-    transition: {
-        type: Object,
-        value: { backTransition: true, duration: 300, timingFunction: 'ease' },
     },
 };
 export default props;

@@ -9,5 +9,6 @@
         <text class="pw-label">密码</text>
         <input type="safe-password" class="pw-input" placeholder="请输入密码" value="{{password}}" bindinput="bindPasswordInput" />
   </view>
-  <button class="login-btn" bindtap="login">登录</button>
+  <t-button class="login-btn" bindtap="login">登录</t-button>
 </view>
+

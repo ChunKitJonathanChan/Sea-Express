@@ -24,10 +24,9 @@
         autoplay="true"
         vertical="true"
         circular="true"
-        interval="{{interval}}"
+        interval="2000"
         display-multiple-items="1"
-        class="{{classPrefix}}__content {{classPrefix}}__content--vertical"
-        bindchange="onChange"
+        class="{{classPrefix}}__content--vertical"
       >
         <block wx:for="{{content}}" wx:key="index">
           <swiper-item>

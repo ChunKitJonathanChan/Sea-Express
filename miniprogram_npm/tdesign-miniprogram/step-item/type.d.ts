@@ -15,6 +15,10 @@ export interface TdStepItemProps {
         type: StringConstructor;
         value?: StepStatus;
     };
+    style?: {
+        type: StringConstructor;
+        value?: string;
+    };
     subStepItems?: {
         type: ArrayConstructor;
         value?: SubStepItem[];
