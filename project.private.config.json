@@ -3,5 +3,6 @@
   "projectname": "sea-express",
   "setting": {
     "compileHotReLoad": true
-  }
+  },
+  "libVersion": "development"
 }

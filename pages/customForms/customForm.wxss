@@ -1,0 +1,34 @@
+/* pages/customForms/customForm.wxss */
+
+.title_container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 42rpx 0;
+  box-sizing: border-box; 
+}
+
+.title_container text {
+  font-size: 22px;
+}
+
+.item-list-container{
+  --td-input-vertical-padding: 6rpx;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+}
+
+.item-row{
+  display: flex;
+}
+
+.item-list-btn{
+  margin-top: 12rpx;
+}
+
+.external-class {
+  border-radius: 0 !important;
+}
+
