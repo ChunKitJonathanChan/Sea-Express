@@ -30,7 +30,14 @@
       "text": "登录",
       "iconPath": "images/tabbar_login.png",
       "selectedIconPath": "images/tabbar_login_HL.png"
-    }]
+    },
+    {
+      "pagePath": "pages/packages/package",
+      "text": "testing",
+      "iconPath": "images/tabbar_login.png",
+      "selectedIconPath": "images/tabbar_login_HL.png"
+    }
+  ]
   },
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",

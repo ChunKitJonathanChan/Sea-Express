@@ -12,7 +12,7 @@ App({
       success: res => {
 
         console.log("code: ", res.code);
-        
+
         if (res.code) {
           wx.request({
             url: 'https://vmgzuhs2ta.execute-api.us-west-2.amazonaws.com/default/sea_express_login',

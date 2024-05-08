@@ -23,8 +23,8 @@
     <view class='item-list-container'>
       <view class="item-row" wx:for="{{items}}" wx:key="index">
         <t-input class="item-input" layout="vertical" size="small" label="物品名称" bindinput="onItemNameInput" data-index="{{index}}"></t-input>
-        <t-input class="item-input" layout="vertical" size="small" label="数量" bindinput="onQuantityInput" data-index="{{index}}"></t-input>
-        <t-input class="item-input" label="价格" layout="vertical" size="small" type="number" maxlength="3" bindinput="onPriceInput" data-index="{{index}}"></t-input>
+        <t-input class="item-input" layout="vertical" size="small" label="数量" bindinput="onQuantityInput" data-index="{{index}}" maxlength="3"></t-input>
+        <t-input class="item-input" label="价格" layout="vertical" size="small" type="number" maxlength="4" bindinput="onPriceInput" data-index="{{index}}"></t-input>
       </view>
       <t-button class="item-list-btn" type="primary" size="extra-small" bindtap="addItemRow" theme="light" variant="outline">添加物品</t-button>
     </view>
