@@ -1,10 +1,15 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/logs/logs",
     "pages/logins/login",
     "pages/packages/package",
-    "pages/customForms/customForm"
+    "pages/customForms/customForm",
+    "pages/announcement/announcement",
+    "pages/index1/index"
+
+    
   ],
   "usingComponents": {
     "t-button": "/miniprogram_npm/tdesign-miniprogram/button/button"
@@ -30,12 +35,17 @@
       "text": "登录",
       "iconPath": "images/tabbar_login.png",
       "selectedIconPath": "images/tabbar_login_HL.png"
-    },
-    {
-      "pagePath": "pages/packages/package",
-      "text": "testing",
-      "iconPath": "images/tabbar_login.png",
-      "selectedIconPath": "images/tabbar_login_HL.png"
+    },{
+      "pagePath": "pages/announcement/announcement",
+      "text": "公告",
+      "iconPath": "images/tabbar_package.png",
+      "selectedIconPath": "images/tabbar_package_HL.png"
+    }
+    ,{
+      "pagePath": "pages/index1/index",
+      "text": "主页",
+      "iconPath": "images/tabbar_package.png",
+      "selectedIconPath": "images/tabbar_package_HL.png"
     }
   ]
   },
