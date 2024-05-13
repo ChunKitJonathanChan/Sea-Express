@@ -20,9 +20,8 @@ export default class Tabs extends SuperComponent {
         tabs: any[];
         currentIndex: number;
         trackStyle: string;
-        isScrollX: boolean;
-        direction: string;
         offset: number;
+        scrollLeft: number;
         tabID: string;
         placement: string;
     };
@@ -32,6 +31,7 @@ export default class Tabs extends SuperComponent {
     };
     initChildId(): void;
     methods: {
+        onScroll(e: any): void;
         updateTabs(cb: any): void;
         setCurrentIndexByName(name: any): void;
         setCurrentIndex(index: number): void;

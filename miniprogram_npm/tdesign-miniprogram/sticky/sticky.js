@@ -15,13 +15,9 @@ const ContainerClass = `.${name}`;
 let Sticky = class Sticky extends SuperComponent {
     constructor() {
         super(...arguments);
-        this.externalClasses = [`${prefix}-class`];
+        this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`];
         this.properties = props;
-        this.behaviors = [
-            pageScrollMixin(function (event) {
-                this.onScroll(event);
-            }),
-        ];
+        this.behaviors = [pageScrollMixin()];
         this.observers = {
             'offsetTop, disabled, container'() {
                 this.onScroll();
@@ -89,7 +85,7 @@ let Sticky = class Sticky extends SuperComponent {
                     let contentStyle = '';
                     if (isFixed) {
                         containerStyle += `height:${height}px;`;
-                        contentStyle += `position:fixed;top:${offsetTop}px;`;
+                        contentStyle += `position:fixed;top:${offsetTop}px;left:0;right:0;`;
                     }
                     if (transform) {
                         const translate = `translate3d(0, ${transform}px, 0)`;

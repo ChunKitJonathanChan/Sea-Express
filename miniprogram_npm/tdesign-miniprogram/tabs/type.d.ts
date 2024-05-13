@@ -4,10 +4,6 @@ export interface TdTabsProps {
         type: ObjectConstructor;
         value?: TabAnimation;
     };
-    style?: {
-        type: StringConstructor;
-        value?: string;
-    };
     externalClasses?: {
         type: ArrayConstructor;
         value?: ['t-class', 't-class-item', 't-class-active', 't-class-track'];
@@ -17,6 +13,10 @@ export interface TdTabsProps {
         value?: boolean;
     };
     spaceEvenly?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
+    split?: {
         type: BooleanConstructor;
         value?: boolean;
     };

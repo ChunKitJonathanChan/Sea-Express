@@ -12,14 +12,22 @@ export default class DropdownMenu extends SuperComponent {
         menus: any;
         activeIdx: number;
         bottom: number;
+        _arrowIcon: {
+            name: string | object;
+        };
     };
     relations: RelationsOptions;
     lifetimes: {
         ready(): void;
     };
+    observers: {
+        arrowIcon(v: any): void;
+        activeIdx(v: number): void;
+    };
     methods: {
         toggle(index: number): void;
         getAllItems(): void;
         handleToggle(e: WechatMiniprogram.BaseEvent): void;
+        noop(): void;
     };
 }

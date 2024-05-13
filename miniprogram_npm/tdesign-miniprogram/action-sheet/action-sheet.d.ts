@@ -1,6 +1,7 @@
 import { SuperComponent } from '../common/src/index';
 export default class ActionSheet extends SuperComponent {
     static show: (options: import("./show").ActionSheetShowOption) => WechatMiniprogram.Component.TrivialInstance;
+    behaviors: string[];
     externalClasses: string[];
     properties: {
         align?: {
@@ -23,7 +24,15 @@ export default class ActionSheet extends SuperComponent {
             type: ArrayConstructor;
             value?: (string | import("./type").ActionSheetItem)[];
         };
+        popupProps?: {
+            type: ObjectConstructor;
+            value?: object;
+        };
         showCancel?: {
+            type: BooleanConstructor;
+            value?: boolean;
+        };
+        showOverlay?: {
             type: BooleanConstructor;
             value?: boolean;
         };
@@ -45,6 +54,8 @@ export default class ActionSheet extends SuperComponent {
         classPrefix: string;
         gridThemeItems: any[];
         currentSwiperIndex: number;
+        defaultPopUpProps: {};
+        defaultPopUpzIndex: number;
     };
     controlledProps: {
         key: string;

@@ -8,8 +8,8 @@ export interface TdTextareaProps {
         value?: boolean;
     };
     autosize?: {
-        type: BooleanConstructor;
-        value?: boolean;
+        type: null;
+        value?: boolean | object;
     };
     confirmHold?: {
         type: BooleanConstructor;

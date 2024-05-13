@@ -31,6 +31,7 @@
 }
 .t-tree-select__column {
   width: var(--td-tree-colum-width, 206rpx);
+  color: var(--td-tree-colum-text-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, 0.9))));
 }
 .t-tree-select__column--left {
   background: var(--td-tree-root-bg-color, var(--td-bg-color-secondarycontainer, var(--td-gray-color-1, #f3f3f3)));
@@ -45,6 +46,11 @@
   color: transparent;
 }
 .t-tree-select__item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   height: var(--td-tree-item-height, 112rpx);
   line-height: var(--td-tree-item-height, 112rpx);
   font-size: var(--td-tree-item-font-size, 32rpx);
@@ -56,4 +62,5 @@
 }
 .t-tree-select-column {
   width: 100%;
+  height: auto;
 }

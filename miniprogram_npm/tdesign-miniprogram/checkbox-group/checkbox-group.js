@@ -23,19 +23,26 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
             classPrefix: name,
             checkboxOptions: [],
         };
-        this.properties = Object.assign(Object.assign({}, props), { borderless: {
-                type: Boolean,
-                value: false,
-            } });
+        this.properties = props;
         this.observers = {
             value() {
                 this.updateChildren();
             },
-        };
-        this.lifetimes = {
-            attached() {
+            options() {
                 this.initWithOptions();
             },
+            disabled(v) {
+                var _a;
+                if ((_a = this.data.options) === null || _a === void 0 ? void 0 : _a.length) {
+                    this.initWithOptions();
+                    return;
+                }
+                this.getChildren().forEach((item) => {
+                    item.setDisabled(v);
+                });
+            },
+        };
+        this.lifetimes = {
             ready() {
                 this.setCheckall();
             },
@@ -48,7 +55,7 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
         ];
         this.$checkAll = null;
         this.methods = {
-            getChilds() {
+            getChildren() {
                 let items = this.$children;
                 if (!items.length) {
                     items = this.selectAllComponents(`.${prefix}-checkbox-option`);
@@ -56,7 +63,7 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
                 return items || [];
             },
             updateChildren() {
-                const items = this.getChilds();
+                const items = this.getChildren();
                 const { value } = this.data;
                 if (items.length > 0) {
                     items.forEach((item) => {
@@ -70,18 +77,20 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
                     }
                 }
             },
-            updateValue({ value, checked, checkAll, indeterminate }) {
+            updateValue({ value, checked, checkAll, item, indeterminate }) {
                 let { value: newValue } = this.data;
                 const { max } = this.data;
-                const keySet = new Set(this.getChilds().map((item) => item.data.value));
+                const keySet = new Set(this.getChildren().map((item) => item.data.value));
                 newValue = newValue.filter((value) => keySet.has(value));
                 if (max && checked && newValue.length === max)
                     return;
                 if (checkAll) {
-                    const items = this.getChilds();
+                    const items = this.getChildren();
                     newValue =
                         !checked && indeterminate
-                            ? items.map((item) => item.data.value)
+                            ? items
+                                .filter(({ data }) => !(data.disabled && !newValue.includes(data.value)))
+                                .map((item) => item.data.value)
                             : items
                                 .filter(({ data }) => {
                                 if (data.disabled) {
@@ -98,10 +107,10 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
                     const index = newValue.findIndex((v) => v === value);
                     newValue.splice(index, 1);
                 }
-                this._trigger('change', { value: newValue });
+                this._trigger('change', { value: newValue, context: item });
             },
             initWithOptions() {
-                const { options } = this.data;
+                const { options, value } = this.data;
                 if (!(options === null || options === void 0 ? void 0 : options.length) || !Array.isArray(options))
                     return;
                 const checkboxOptions = options.map((item) => {
@@ -110,8 +119,9 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
                         ? {
                             label: `${item}`,
                             value: item,
+                            checked: value === null || value === void 0 ? void 0 : value.includes(item),
                         }
-                        : Object.assign({}, item);
+                        : Object.assign(Object.assign({}, item), { checked: value === null || value === void 0 ? void 0 : value.includes(item.value) });
                 });
                 this.setData({
                     checkboxOptions,
@@ -125,17 +135,17 @@ let CheckBoxGroup = class CheckBoxGroup extends SuperComponent {
                 if (item.checkAll) {
                     rect.indeterminate = (_a = this.$checkAll) === null || _a === void 0 ? void 0 : _a.data.indeterminate;
                 }
-                this.updateValue(Object.assign(Object.assign(Object.assign({}, item), { checked }), rect));
+                this.updateValue(Object.assign(Object.assign(Object.assign({}, item), { checked, item }), rect));
             },
             setCheckall() {
-                const items = this.getChilds();
+                const items = this.getChildren();
                 if (!this.$checkAll) {
                     this.$checkAll = items.find((item) => item.data.checkAll);
                 }
                 if (!this.$checkAll)
                     return;
                 const { value } = this.data;
-                const valueSet = new Set(value.filter((val) => val !== this.$checkAll.data.value));
+                const valueSet = new Set(value === null || value === void 0 ? void 0 : value.filter((val) => val !== this.$checkAll.data.value));
                 const isCheckall = items.every((item) => (item.data.checkAll ? true : valueSet.has(item.data.value)));
                 this.$checkAll.setData({
                     checked: valueSet.size > 0,

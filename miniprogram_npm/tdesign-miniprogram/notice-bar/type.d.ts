@@ -19,6 +19,10 @@ export interface TdNoticeBarProps {
         type: StringConstructor;
         value?: string;
     };
+    interval: {
+        type: NumberConstructor;
+        value: number;
+    };
     marquee?: {
         type: null;
         value?: boolean | DrawMarquee;
@@ -44,6 +48,7 @@ export interface TdNoticeBarProps {
         value?: boolean;
     };
 }
+export declare type NoticeBarTrigger = 'prefix-icon' | 'content' | 'operation' | 'suffix-icon';
 export interface DrawMarquee {
     speed?: number;
     loop?: number;

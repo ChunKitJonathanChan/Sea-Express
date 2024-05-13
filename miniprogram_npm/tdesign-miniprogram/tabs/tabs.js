@@ -25,7 +25,13 @@ let Tabs = class Tabs extends SuperComponent {
     constructor() {
         super(...arguments);
         this.behaviors = [touch];
-        this.externalClasses = [`${prefix}-class`, `${prefix}-class-item`, `${prefix}-class-active`, `${prefix}-class-track`];
+        this.externalClasses = [
+            `${prefix}-class`,
+            `${prefix}-class-item`,
+            `${prefix}-class-active`,
+            `${prefix}-class-track`,
+            `${prefix}-class-content`,
+        ];
         this.relations = {
             '../tab-panel/tab-panel': {
                 type: 'descendant',
@@ -62,9 +68,8 @@ let Tabs = class Tabs extends SuperComponent {
             tabs: [],
             currentIndex: -1,
             trackStyle: '',
-            isScrollX: true,
-            direction: 'X',
             offset: 0,
+            scrollLeft: 0,
             tabID: '',
             placement: 'top',
         };
@@ -85,6 +90,12 @@ let Tabs = class Tabs extends SuperComponent {
             },
         };
         this.methods = {
+            onScroll(e) {
+                const { scrollLeft } = e.detail;
+                this.setData({
+                    scrollLeft,
+                });
+            },
             updateTabs(cb) {
                 const { children } = this;
                 const tabs = children.map((child) => child.data);
@@ -131,27 +142,27 @@ let Tabs = class Tabs extends SuperComponent {
                 return offset + targetLeft - (1 / 2) * containerWidth + targetWidth / 2;
             },
             getTrackSize() {
-                return new Promise((resolve) => {
+                return new Promise((resolve, reject) => {
                     if (this.trackWidth) {
                         resolve(this.trackWidth);
                         return;
                     }
-                    getRect(this, `.${prefix}-tabs__track`).then((res) => {
+                    getRect(this, `.${prefix}-tabs__track`)
+                        .then((res) => {
                         if (res) {
                             this.trackWidth = res.width;
                             resolve(this.trackWidth);
                         }
-                    });
+                    })
+                        .catch(reject);
                 });
             },
             setTrack() {
                 return __awaiter(this, void 0, void 0, function* () {
-                    if (!this.properties.showBottomLine)
-                        return;
                     const { children } = this;
                     if (!children)
                         return;
-                    const { currentIndex, isScrollX, direction } = this.data;
+                    const { currentIndex } = this.data;
                     if (currentIndex <= -1)
                         return;
                     try {
@@ -164,30 +175,26 @@ let Tabs = class Tabs extends SuperComponent {
                         let totalSize = 0;
                         res.forEach((item) => {
                             if (count < currentIndex) {
-                                distance += isScrollX ? item.width : item.height;
+                                distance += item.width;
                                 count += 1;
                             }
-                            totalSize += isScrollX ? item.width : item.height;
+                            totalSize += item.width;
                         });
                         if (this.containerWidth) {
-                            const offset = this.calcScrollOffset(this.containerWidth, rect.left, rect.width, this.data.offset);
+                            const offset = this.calcScrollOffset(this.containerWidth, rect.left, rect.width, this.data.scrollLeft);
                             const maxOffset = totalSize - this.containerWidth;
                             this.setData({
                                 offset: Math.min(Math.max(offset, 0), maxOffset),
                             });
                         }
-                        if (isScrollX) {
+                        if (this.data.theme === 'line') {
                             const trackLineWidth = yield this.getTrackSize();
                             distance += (rect.width - trackLineWidth) / 2;
                         }
-                        let trackStyle = `-webkit-transform: translate${direction}(${distance}px);
-          transform: translate${direction}(${distance}px);
-        `;
-                        if (!isScrollX) {
-                            trackStyle += `height: ${rect.height}px;`;
-                        }
                         this.setData({
-                            trackStyle,
+                            trackStyle: `-webkit-transform: translateX(${distance}px);
+            transform: translateX(${distance}px);
+          `,
                         });
                     }
                     catch (err) {
@@ -238,8 +245,13 @@ let Tabs = class Tabs extends SuperComponent {
                 const len = tabs.length;
                 for (let i = step; currentIndex + step >= 0 && currentIndex + step < len; i += step) {
                     const newIndex = currentIndex + i;
-                    if (newIndex >= 0 && newIndex < len && tabs[newIndex] && !tabs[newIndex].disabled) {
-                        return newIndex;
+                    if (newIndex >= 0 && newIndex < len && tabs[newIndex]) {
+                        if (!tabs[newIndex].disabled) {
+                            return newIndex;
+                        }
+                    }
+                    else {
+                        return currentIndex;
                     }
                 }
                 return -1;

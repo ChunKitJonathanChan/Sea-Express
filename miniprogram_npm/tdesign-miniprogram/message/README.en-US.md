@@ -18,6 +18,8 @@ theme | String | info | options：info/success/warning/error。Typescript：`Mes
 visible | Boolean | false | \- | N
 default-visible | Boolean | false | uncontrolled property | N
 z-index | Number | 15000 | \- | N
+single | Boolean | true | Whether to display only one message. Note that when single=false, the three categories of link, scroll, and close will not be covered.| N
+gap | String | 12 | The spacing between two messages, default 12px. Example: '12', '12px', '18rpx' | N
 
 ### Message Events
 
@@ -27,3 +29,18 @@ action-btn-click | - | \-
 close-btn-click | - | \-
 duration-end | \- | \-
 link-click | \- | \-
+
+
+### CSS Variables
+The component provides the following CSS variables, which can be used to customize styles.
+Name | Default Value | Description 
+-- | -- | --
+--td-message-bg-color | @bg-color-container | - 
+--td-message-border-radius | @radius-default | - 
+--td-message-box-shadow | @shadow-4 | - 
+--td-message-close-icon-color | @font-gray-3 | - 
+--td-message-content-font-color | @font-gray-1 | - 
+--td-message-error-color | @error-color | - 
+--td-message-info-color | @brand-color | - 
+--td-message-success-color | @success-color | - 
+--td-message-warning-color | @warning-color | - 

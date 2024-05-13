@@ -18,6 +18,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 import { isObject, SuperComponent, wxComponent } from '../common/src/index';
 import props from './props';
 import config from '../common/config';
+import { isOverSize } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-upload`;
 let Upload = class Upload extends SuperComponent {
@@ -35,6 +36,12 @@ let Upload = class Upload extends SuperComponent {
             customFiles: [],
             customLimit: 0,
             column: 4,
+            dragBaseData: {},
+            rows: 0,
+            dragWrapStyle: '',
+            dragList: [],
+            dragging: true,
+            dragLayout: false,
         };
         this.properties = props;
         this.controlledProps = [
@@ -44,11 +51,8 @@ let Upload = class Upload extends SuperComponent {
             },
         ];
         this.observers = {
-            files(files) {
-                this.handleLimit(files, this.data.max);
-            },
-            max(max) {
-                this.handleLimit(this.data.customFiles, max);
+            'files, max, draggable'(files, max) {
+                this.handleLimit(files, max);
             },
             gridConfig() {
                 this.updateGrid();
@@ -88,7 +92,9 @@ let Upload = class Upload extends SuperComponent {
                 return Promise.resolve();
             },
             onAddTap() {
-                const { mediaType, source } = this.properties;
+                const { disabled, mediaType, source } = this.properties;
+                if (disabled)
+                    return;
                 if (source === 'media') {
                     this.chooseMedia(mediaType);
                 }
@@ -97,13 +103,17 @@ let Upload = class Upload extends SuperComponent {
                 }
             },
             chooseMedia(mediaType) {
-                const { config, sizeLimit, max } = this.data;
-                wx.chooseMedia(Object.assign(Object.assign({ count: max === 0 ? 9 : max, mediaType }, config), { success: (res) => {
+                const { config, sizeLimit, customLimit } = this.data;
+                wx.chooseMedia(Object.assign(Object.assign({ count: customLimit, mediaType }, config), { success: (res) => {
                         const files = [];
                         res.tempFiles.forEach((temp) => {
                             const { size, fileType, tempFilePath, width, height, duration, thumbTempFilePath } = temp, res = __rest(temp, ["size", "fileType", "tempFilePath", "width", "height", "duration", "thumbTempFilePath"]);
-                            if (sizeLimit && size > sizeLimit) {
-                                wx.showToast({ icon: 'none', title: `${fileType === 'image' ? '图片' : '视频'}大小超过限制` });
+                            if (isOverSize(size, sizeLimit)) {
+                                let title = `${fileType === 'image' ? '图片' : '视频'}大小超过限制`;
+                                if (typeof sizeLimit !== 'number') {
+                                    title = sizeLimit.message.replace('{sizeLimit}', sizeLimit === null || sizeLimit === void 0 ? void 0 : sizeLimit.size);
+                                }
+                                wx.showToast({ icon: 'none', title });
                                 return;
                             }
                             const name = this.getRandFileName(tempFilePath);
@@ -122,8 +132,12 @@ let Upload = class Upload extends SuperComponent {
                         const files = [];
                         res.tempFiles.forEach((temp) => {
                             const { size, type: fileType, path: tempFilePath } = temp, res = __rest(temp, ["size", "type", "path"]);
-                            if (sizeLimit && size > sizeLimit) {
-                                wx.showToast({ icon: 'none', title: `${fileType === 'image' ? '图片' : '视频'}大小超过限制` });
+                            if (isOverSize(size, sizeLimit)) {
+                                let title = `${fileType === 'image' ? '图片' : '视频'}大小超过限制`;
+                                if (typeof sizeLimit !== 'number') {
+                                    title = sizeLimit.message.replace('{sizeLimit}', sizeLimit === null || sizeLimit === void 0 ? void 0 : sizeLimit.size);
+                                }
+                                wx.showToast({ icon: 'none', title });
                                 return;
                             }
                             const name = this.getRandFileName(tempFilePath);
@@ -140,10 +154,56 @@ let Upload = class Upload extends SuperComponent {
                 this._trigger('add', { files });
                 this.startUpload(files);
             },
+            dragVibrate(e) {
+                var _a;
+                const { vibrateType } = e;
+                const { draggable } = this.data;
+                const dragVibrate = (_a = draggable === null || draggable === void 0 ? void 0 : draggable.vibrate) !== null && _a !== void 0 ? _a : true;
+                const dragCollisionVibrate = draggable === null || draggable === void 0 ? void 0 : draggable.collisionVibrate;
+                if ((dragVibrate && vibrateType === 'longPress') || (dragCollisionVibrate && vibrateType === 'touchMove')) {
+                    wx.vibrateShort({
+                        type: 'light',
+                    });
+                }
+            },
+            dragStatusChange(e) {
+                const { dragging } = e;
+                this.setData({ dragging });
+            },
+            dragEnd(e) {
+                const { dragCollisionList } = e;
+                let files = [];
+                if (dragCollisionList.length === 0) {
+                    files = this.data.customFiles;
+                }
+                else {
+                    files = dragCollisionList.reduce((list, item) => {
+                        const { realKey, data, fixed } = item;
+                        if (!fixed) {
+                            list[realKey] = Object.assign({}, data);
+                        }
+                        return list;
+                    }, []);
+                }
+                this.triggerDropEvent(files);
+            },
+            triggerDropEvent(files) {
+                const { transition } = this.properties;
+                if (transition.backTransition) {
+                    const timer = setTimeout(() => {
+                        this.triggerEvent('drop', { files });
+                        clearTimeout(timer);
+                    }, transition.duration);
+                }
+                else {
+                    this.triggerEvent('drop', { files });
+                }
+            },
         };
     }
     onProofTap(e) {
         var _a;
+        this.onFileClick(e);
         const { index } = e.currentTarget.dataset;
         wx.previewImage({
             urls: this.data.customFiles.filter((file) => file.percent !== -1).map((file) => file.url),
@@ -151,20 +211,15 @@ let Upload = class Upload extends SuperComponent {
         });
     }
     handleLimit(customFiles, max) {
-        while (max !== 0 && customFiles.length - max > 0) {
-            customFiles.pop();
+        if (max === 0) {
+            max = 20;
         }
-        const proofs = [];
-        customFiles.forEach((item) => {
-            if (item.type !== 'video') {
-                proofs.push(item.url);
-            }
-        });
         this.setData({
-            customFiles,
-            proofs,
-            customLimit: max === 0 ? Number.MAX_SAFE_INTEGER : max - customFiles.length,
+            customFiles: customFiles.length > max ? customFiles.slice(0, max) : customFiles,
+            customLimit: max - customFiles.length,
+            dragging: true,
         });
+        this.initDragLayout();
     }
     triggerSuccessEvent(files) {
         this._trigger('success', { files: [...this.data.customFiles, ...files] });
@@ -212,6 +267,76 @@ let Upload = class Upload extends SuperComponent {
         this.setData({
             gridItemStyle: `width:${width}rpx;height:${height}rpx`,
             column: column,
+        });
+    }
+    initDragLayout() {
+        const { draggable, disabled } = this.properties;
+        if (!draggable || disabled)
+            return;
+        this.initDragList();
+        this.initDragBaseData();
+    }
+    initDragList() {
+        let i = 0;
+        const { column, customFiles, customLimit } = this.data;
+        const dragList = [];
+        customFiles.forEach((item, index) => {
+            dragList.push({
+                realKey: i,
+                sortKey: index,
+                tranX: `${(index % column) * 100}%`,
+                tranY: `${Math.floor(index / column) * 100}%`,
+                data: Object.assign({}, item),
+            });
+            i += 1;
+        });
+        if (customLimit > 0) {
+            const listLength = dragList.length;
+            dragList.push({
+                realKey: listLength,
+                sortKey: listLength,
+                tranX: `${(listLength % column) * 100}%`,
+                tranY: `${Math.floor(listLength / column) * 100}%`,
+                fixed: true,
+            });
+        }
+        this.data.rows = Math.ceil(dragList.length / column);
+        this.setData({
+            dragList,
+        });
+    }
+    initDragBaseData() {
+        const { classPrefix, rows, column, customFiles } = this.data;
+        if (customFiles.length === 0)
+            return;
+        const query = this.createSelectorQuery();
+        const selectorGridItem = `.${classPrefix} >>> .t-grid-item`;
+        const selectorGrid = `.${classPrefix} >>> .t-grid`;
+        query.select(selectorGridItem).boundingClientRect();
+        query.select(selectorGrid).boundingClientRect();
+        query.selectViewport().scrollOffset();
+        query.exec((res) => {
+            const [{ width, height }, { left, top }, { scrollTop }] = res;
+            const dragBaseData = {
+                rows,
+                classPrefix,
+                itemWidth: width,
+                itemHeight: height,
+                wrapLeft: left,
+                wrapTop: top + scrollTop,
+                columns: column,
+            };
+            const dragWrapStyle = `height: ${rows * height}px`;
+            this.setData({
+                dragBaseData,
+                dragWrapStyle,
+                dragLayout: true,
+            }, () => {
+                const timer = setTimeout(() => {
+                    this.setData({ dragging: false });
+                    clearTimeout(timer);
+                }, 0);
+            });
         });
     }
 };

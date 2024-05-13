@@ -17,7 +17,7 @@ const ComponentNativeProps = [
     'definitionFilter',
 ];
 export const toComponent = function toComponent(options) {
-    const { relations, behaviors = [], properties, externalClasses = [] } = options;
+    const { relations, behaviors = [], externalClasses = [] } = options;
     if (options.properties) {
         Object.keys(options.properties).forEach((k) => {
             let opt = options.properties[k];
@@ -130,9 +130,6 @@ export const wxComponent = function wxComponent() {
         }
         const current = new WxComponent();
         current.options = current.options || {};
-        if (current.options.addGlobalClass === undefined) {
-            current.options.addGlobalClass = true;
-        }
         if (canUseVirtualHost()) {
             current.options.virtualHost = true;
         }

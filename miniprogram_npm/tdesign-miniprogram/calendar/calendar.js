@@ -8,15 +8,16 @@ import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
 import TCalendar from '../common/shared/calendar/index';
+import useCustomNavbar from '../mixins/using-custom-navbar';
 const { prefix } = config;
 const name = `${prefix}-calendar`;
 let Calendar = class Calendar extends SuperComponent {
     constructor() {
         super(...arguments);
+        this.behaviors = [useCustomNavbar];
         this.externalClasses = [`${prefix}-class`];
         this.options = {
             multipleSlots: true,
-            styleIsolation: 'apply-shared',
         };
         this.properties = props;
         this.data = {
@@ -37,16 +38,24 @@ let Calendar = class Calendar extends SuperComponent {
             },
         ];
         this.lifetimes = {
-            ready() {
+            created() {
                 this.base = new TCalendar(this.properties);
+            },
+            ready() {
                 this.initialValue();
                 this.setData({
                     days: this.base.getDays(),
                 });
                 this.calcMonths();
+                if (!this.data.usePopup) {
+                    this.scrollIntoView();
+                }
             },
         };
         this.observers = {
+            type(v) {
+                this.base.type = v;
+            },
             confirmBtn(v) {
                 if (typeof v === 'string') {
                     this.setData({ innerConfirmBtn: v === 'slot' ? 'slot' : { content: v } });
@@ -56,25 +65,27 @@ let Calendar = class Calendar extends SuperComponent {
                 }
             },
             'firstDayOfWeek,minDate,maxDate'(firstDayOfWeek, minDate, maxDate) {
-                if (this.base) {
-                    this.base.firstDayOfWeek = firstDayOfWeek;
-                    this.base.minDate = minDate;
-                    this.base.maxDate = maxDate;
-                    this.calcMonths();
-                }
+                firstDayOfWeek && (this.base.firstDayOfWeek = firstDayOfWeek);
+                minDate && (this.base.minDate = minDate);
+                maxDate && (this.base.maxDate = maxDate);
+                this.calcMonths();
             },
             value(v) {
-                if (this.base) {
-                    this.base.value = v;
-                }
+                this.base.value = v;
+                this.calcMonths();
             },
             visible(v) {
                 if (v) {
                     this.scrollIntoView();
-                    if (this.base) {
-                        this.base.value = this.data.value;
-                        this.calcMonths();
-                    }
+                    this.base.value = this.data.value;
+                    this.calcMonths();
+                }
+            },
+            format(v) {
+                const { usePopup, visible } = this.data;
+                this.base.format = v;
+                if (!usePopup || visible) {
+                    this.calcMonths();
                 }
             },
         };

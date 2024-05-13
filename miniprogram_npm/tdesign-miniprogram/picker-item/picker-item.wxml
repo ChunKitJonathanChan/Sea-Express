@@ -14,12 +14,13 @@
   >
     <view
       class="{{_.cls(classPrefix + '__item', [['active', curIndex == index]])}}"
+      style="height: {{pickItemHeight}}px"
       wx:for="{{options}}"
       wx:key="index"
       wx:for-item="option"
       data-index="{{ index }}"
     >
-      {{option.label}}
+      {{option[labelAlias]}}
     </view>
   </view>
 </view>

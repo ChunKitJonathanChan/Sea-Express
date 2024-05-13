@@ -31,6 +31,7 @@
 .t-swiper-host {
   border-radius: var(--td-swiper-radius, var(--td-radius-large, 18rpx));
   overflow: hidden;
+  transform: translateY(0);
 }
 .t-swiper__item {
   display: flex;
@@ -43,6 +44,5 @@
   transition: all 0.3s ease;
 }
 .t-swiper__image-host {
-  display: block;
   width: 100%;
 }

@@ -1,5 +1,6 @@
 import { SuperComponent, RelationsOptions } from '../common/src/index';
 export default class Picker extends SuperComponent {
+    behaviors: string[];
     properties: import("./type").TdPickerProps;
     externalClasses: string[];
     options: {
@@ -7,11 +8,16 @@ export default class Picker extends SuperComponent {
     };
     relations: RelationsOptions;
     observers: {
-        value(): void;
+        'value, visible'(): void;
+        keys(obj: any): void;
     };
     data: {
         prefix: string;
         classPrefix: string;
+        labelAlias: string;
+        valueAlias: string;
+        defaultPopUpProps: {};
+        defaultPopUpzIndex: number;
     };
     methods: {
         updateChildren(): void;

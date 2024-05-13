@@ -32,3 +32,20 @@
   border-radius: 0 !important;
 }
 
+.t-toast_success{
+  --td-toast-column-icon-size: 114rpx;
+  --td-toast-bg-color: rgb(0, 255, 0);
+  font-size: 38rpx;
+  min-width: 320rpx;
+  min-height: 240rpx;
+}
+
+.t-toast_error{
+  --td-toast-column-icon-size: 114rpx;
+  --td-toast-bg-color: rgb(255, 0, 0);
+  font-size: 38rpx;
+  min-width: 440rpx;
+  min-height: 240rpx;
+}
+
+

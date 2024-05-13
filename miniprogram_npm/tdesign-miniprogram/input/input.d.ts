@@ -10,6 +10,7 @@ export default class Input extends SuperComponent {
         prefix: string;
         classPrefix: string;
         classBasePrefix: string;
+        showClearIcon: boolean;
     };
     lifetimes: {
         ready(): void;
@@ -18,9 +19,11 @@ export default class Input extends SuperComponent {
         prefixIcon(v: any): void;
         suffixIcon(v: any): void;
         clearable(v: any): void;
+        clearTrigger(): void;
     };
     methods: {
         updateValue(value: any): void;
+        updateClearIconVisible(value?: boolean): void;
         onInput(e: any): void;
         onFocus(e: any): void;
         onBlur(e: any): void;
@@ -29,5 +32,6 @@ export default class Input extends SuperComponent {
         onSuffixIconClick(): void;
         clearInput(e: any): void;
         onKeyboardHeightChange(e: any): void;
+        onNickNameReview(e: any): void;
     };
 }
