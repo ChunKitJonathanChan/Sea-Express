@@ -211,9 +211,7 @@ Component({
         });  
       } 
       else {
-        wx.showToast({
-          title: 'developing',
-        })
+        // under construction
       }
     }
   },

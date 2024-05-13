@@ -39,7 +39,6 @@
   min-width: 320rpx;
   min-height: 240rpx;
 }
-
 .t-toast_error{
   --td-toast-column-icon-size: 114rpx;
   --td-toast-bg-color: rgb(255, 0, 0);
