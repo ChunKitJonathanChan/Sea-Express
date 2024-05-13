@@ -9,11 +9,13 @@ import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import { ActionSheetTheme, show } from './show';
 import props from './props';
+import useCustomNavbar from '../mixins/using-custom-navbar';
 const { prefix } = config;
 const name = `${prefix}-action-sheet`;
 let ActionSheet = class ActionSheet extends SuperComponent {
     constructor() {
         super(...arguments);
+        this.behaviors = [useCustomNavbar];
         this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-cancel`];
         this.properties = Object.assign({}, props);
         this.data = {
@@ -21,6 +23,8 @@ let ActionSheet = class ActionSheet extends SuperComponent {
             classPrefix: name,
             gridThemeItems: [],
             currentSwiperIndex: 0,
+            defaultPopUpProps: {},
+            defaultPopUpzIndex: 11500,
         };
         this.controlledProps = [
             {
@@ -73,12 +77,18 @@ let ActionSheet = class ActionSheet extends SuperComponent {
                 const realIndex = isSwiperMode ? index + currentSwiperIndex * count : index;
                 if (item) {
                     this.triggerEvent('selected', { selected: item, index: realIndex });
-                    this.trigger('close', { trigger: 'select' });
-                    this._trigger('visible-change', { visible: false });
+                    if (!item.disabled) {
+                        this.triggerEvent('close', { trigger: 'select' });
+                        this._trigger('visible-change', { visible: false });
+                    }
                 }
             },
             onCancel() {
                 this.triggerEvent('cancel');
+                if (this.autoClose) {
+                    this.setData({ visible: false });
+                    this.autoClose = false;
+                }
             },
         };
     }

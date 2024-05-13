@@ -27,17 +27,16 @@
 }
 .t-image-viewer {
   position: fixed;
-  top: 0;
+  top: var(--td-image-viewer-top, var(--td-position-fixed-top, 0));
   left: 0;
   bottom: 0;
   right: 0;
   z-index: 1001;
-  height: 100%;
   transform: translateZ(0);
   overflow: hidden;
 }
 .t-image-viewer__mask {
-  position: fixed;
+  position: absolute;
   z-index: 1000;
   left: 0;
   top: 0;
@@ -51,6 +50,9 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 1005;
+}
+.t-image-viewer .swiper {
+  outline: 0;
 }
 .t-image-viewer__image {
   width: 100%;
@@ -66,7 +68,7 @@
 }
 .t-image-viewer__nav {
   width: 100%;
-  position: fixed;
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-between;

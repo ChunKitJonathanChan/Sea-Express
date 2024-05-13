@@ -9,6 +9,7 @@ import config from '../common/config';
 import props from './props';
 import transition from '../mixins/transition';
 import { calcIcon } from '../common/utils';
+import useCustomNavbar from '../mixins/using-custom-navbar';
 const { prefix } = config;
 const name = `${prefix}-toast`;
 let Toast = class Toast extends SuperComponent {
@@ -18,7 +19,7 @@ let Toast = class Toast extends SuperComponent {
         this.options = {
             multipleSlots: true,
         };
-        this.behaviors = [transition()];
+        this.behaviors = [transition(), useCustomNavbar];
         this.hideTimer = null;
         this.data = {
             prefix,
@@ -26,6 +27,16 @@ let Toast = class Toast extends SuperComponent {
             typeMapIcon: '',
         };
         this.properties = props;
+        this.lifetimes = {
+            detached() {
+                this.destroyed();
+            },
+        };
+        this.pageLifetimes = {
+            hide() {
+                this.hide();
+            },
+        };
         this.methods = {
             show(options) {
                 if (this.hideTimer)
@@ -57,6 +68,8 @@ let Toast = class Toast extends SuperComponent {
             },
             hide() {
                 var _a, _b;
+                if (!this.data.visible)
+                    return;
                 this.setData({ visible: false });
                 (_b = (_a = this.data) === null || _a === void 0 ? void 0 : _a.close) === null || _b === void 0 ? void 0 : _b.call(_a);
                 this.triggerEvent('close');
@@ -70,9 +83,6 @@ let Toast = class Toast extends SuperComponent {
             },
             loop() { },
         };
-    }
-    detached() {
-        this.destroyed();
     }
 };
 Toast = __decorate([

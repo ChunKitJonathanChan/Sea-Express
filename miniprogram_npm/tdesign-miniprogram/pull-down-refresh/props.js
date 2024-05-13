@@ -1,10 +1,17 @@
 const props = {
+    enableBackToTop: {
+        type: Boolean,
+        value: true,
+    },
+    enablePassive: {
+        type: Boolean,
+        value: false,
+    },
     externalClasses: {
         type: Array,
     },
     loadingBarHeight: {
-        type: String,
-        optionalTypes: [Number],
+        type: null,
         value: 50,
     },
     loadingProps: {
@@ -14,14 +21,29 @@ const props = {
         type: Array,
         value: [],
     },
+    lowerThreshold: {
+        type: null,
+        value: 50,
+    },
     maxBarHeight: {
-        type: String,
-        optionalTypes: [Number],
+        type: null,
         value: 80,
     },
     refreshTimeout: {
         type: Number,
         value: 3000,
+    },
+    scrollIntoView: {
+        type: String,
+        value: '',
+    },
+    showScrollbar: {
+        type: Boolean,
+        value: true,
+    },
+    upperThreshold: {
+        type: null,
+        value: 50,
     },
     value: {
         type: Boolean,

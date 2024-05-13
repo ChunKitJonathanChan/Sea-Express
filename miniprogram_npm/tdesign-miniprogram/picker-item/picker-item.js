@@ -22,6 +22,15 @@ let PickerItem = class PickerItem extends SuperComponent {
         this.relations = {
             '../picker/picker': {
                 type: 'parent',
+                linked(parent) {
+                    if ('keys' in parent.data) {
+                        const { keys } = parent.data;
+                        this.setData({
+                            labelAlias: (keys === null || keys === void 0 ? void 0 : keys.label) || 'label',
+                            valueAlias: (keys === null || keys === void 0 ? void 0 : keys.value) || 'value',
+                        });
+                    }
+                },
             },
         };
         this.externalClasses = [`${prefix}-class`];
@@ -38,6 +47,10 @@ let PickerItem = class PickerItem extends SuperComponent {
             duration: 0,
             value: '',
             curIndex: 0,
+            columnIndex: 0,
+            labelAlias: 'label',
+            valueAlias: 'value',
+            pickItemHeight: rpx2px(itemHeight),
         };
         this.methods = {
             onTouchStart(event) {
@@ -55,7 +68,7 @@ let PickerItem = class PickerItem extends SuperComponent {
                 });
             },
             onTouchEnd() {
-                const { offset } = this.data;
+                const { offset, labelAlias, valueAlias, columnIndex } = this.data;
                 const { options } = this.properties;
                 if (offset === this.StartOffset) {
                     return;
@@ -71,26 +84,26 @@ let PickerItem = class PickerItem extends SuperComponent {
                 wx.nextTick(() => {
                     var _a, _b, _c;
                     this._selectedIndex = index;
-                    this._selectedValue = (_a = options[index]) === null || _a === void 0 ? void 0 : _a.value;
-                    this._selectedLabel = (_b = options[index]) === null || _b === void 0 ? void 0 : _b.label;
+                    this._selectedValue = (_a = options[index]) === null || _a === void 0 ? void 0 : _a[valueAlias];
+                    this._selectedLabel = (_b = options[index]) === null || _b === void 0 ? void 0 : _b[labelAlias];
                     (_c = this.$parent) === null || _c === void 0 ? void 0 : _c.triggerColumnChange({
                         index,
-                        column: this.columnIndex || 0,
+                        column: columnIndex,
                     });
                 });
             },
             update() {
                 var _a, _b;
-                const { options, value } = this.data;
-                const index = options.findIndex((item) => item.value === value);
+                const { options, value, labelAlias, valueAlias } = this.data;
+                const index = options.findIndex((item) => item[valueAlias] === value);
                 const selectedIndex = index > 0 ? index : 0;
                 this.setData({
                     offset: -selectedIndex * this.itemHeight,
                     curIndex: selectedIndex,
                 });
                 this._selectedIndex = selectedIndex;
-                this._selectedValue = (_a = options[selectedIndex]) === null || _a === void 0 ? void 0 : _a.value;
-                this._selectedLabel = (_b = options[selectedIndex]) === null || _b === void 0 ? void 0 : _b.label;
+                this._selectedValue = (_a = options[selectedIndex]) === null || _a === void 0 ? void 0 : _a[valueAlias];
+                this._selectedLabel = (_b = options[selectedIndex]) === null || _b === void 0 ? void 0 : _b[labelAlias];
             },
             resetOrigin() {
                 this.update();

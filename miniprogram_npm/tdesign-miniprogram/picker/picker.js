@@ -7,11 +7,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { SuperComponent, wxComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
+import useCustomNavbar from '../mixins/using-custom-navbar';
 const { prefix } = config;
 const name = `${prefix}-picker`;
 let Picker = class Picker extends SuperComponent {
     constructor() {
         super(...arguments);
+        this.behaviors = [useCustomNavbar];
         this.properties = props;
         this.externalClasses = [`${prefix}-class`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-title`];
         this.options = {
@@ -26,21 +28,32 @@ let Picker = class Picker extends SuperComponent {
             },
         };
         this.observers = {
-            value() {
+            'value, visible'() {
                 this.updateChildren();
+            },
+            keys(obj) {
+                this.setData({
+                    labelAlias: (obj === null || obj === void 0 ? void 0 : obj.label) || 'label',
+                    valueAlias: (obj === null || obj === void 0 ? void 0 : obj.value) || 'value',
+                });
             },
         };
         this.data = {
             prefix,
             classPrefix: name,
+            labelAlias: 'label',
+            valueAlias: 'value',
+            defaultPopUpProps: {},
+            defaultPopUpzIndex: 11500,
         };
         this.methods = {
             updateChildren() {
-                const { value } = this.properties;
+                const { value, defaultValue } = this.properties;
                 this.$children.forEach((child, index) => {
+                    var _a, _b;
                     child.setData({
-                        value: (value === null || value === void 0 ? void 0 : value[index]) || '',
-                        siblingCount: this.$children.length,
+                        value: (_b = (_a = value === null || value === void 0 ? void 0 : value[index]) !== null && _a !== void 0 ? _a : defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue[index]) !== null && _b !== void 0 ? _b : '',
+                        columnIndex: index,
                     });
                     child.update();
                 });

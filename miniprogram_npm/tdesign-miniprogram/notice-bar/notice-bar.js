@@ -27,7 +27,6 @@ let NoticeBar = class NoticeBar extends SuperComponent {
             `${prefix}-class-suffix-icon`,
         ];
         this.options = {
-            styleIsolation: 'apply-shared',
             multipleSlots: true,
         };
         this.properties = props;
@@ -88,7 +87,8 @@ let NoticeBar = class NoticeBar extends SuperComponent {
                 const warpID = `.${name}__content-wrap`;
                 const nodeID = `.${name}__content`;
                 getAnimationFrame(this, () => {
-                    Promise.all([getRect(this, nodeID), getRect(this, warpID)]).then(([nodeRect, wrapRect]) => {
+                    Promise.all([getRect(this, nodeID), getRect(this, warpID)])
+                        .then(([nodeRect, wrapRect]) => {
                         const { marquee } = this.properties;
                         if (nodeRect == null || wrapRect == null || !nodeRect.width || !wrapRect.width) {
                             return;
@@ -96,7 +96,6 @@ let NoticeBar = class NoticeBar extends SuperComponent {
                         if (marquee || wrapRect.width < nodeRect.width) {
                             const speeding = marquee.speed || 50;
                             const delaying = marquee.delay || 0;
-                            const loops = marquee.loop - 1 || -1;
                             const animationDuration = ((wrapRect.width + nodeRect.width) / speeding) * 1000;
                             const firstAnimationDuration = (nodeRect.width / speeding) * 1000;
                             this.setData({
@@ -104,12 +103,13 @@ let NoticeBar = class NoticeBar extends SuperComponent {
                                 nodeWidth: Number(nodeRect.width),
                                 animationDuration: animationDuration,
                                 delay: delaying,
-                                loop: loops,
+                                loop: marquee.loop - 1,
                                 firstAnimationDuration: firstAnimationDuration,
                             });
-                            this.startScrollAnimation(true);
+                            marquee.loop !== 0 && this.startScrollAnimation(true);
                         }
-                    });
+                    })
+                        .catch(() => { });
                 });
             },
             startScrollAnimation(isFirstScroll = false) {
@@ -159,6 +159,10 @@ let NoticeBar = class NoticeBar extends SuperComponent {
                 this.setData({
                     _prefixIcon: calcIcon(v, THEME_ICON[theme]),
                 });
+            },
+            onChange(e) {
+                const { current, source } = e.detail;
+                this.triggerEvent('change', { current, source });
             },
             clickPrefixIcon() {
                 this.triggerEvent('click', { trigger: 'prefix-icon' });

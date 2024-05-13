@@ -19,7 +19,6 @@ import props from './props';
 import { getRect } from '../common/utils';
 const { prefix } = config;
 const name = `${prefix}-cascader`;
-const defaultOptionLabel = '选择选项';
 let Cascader = class Cascader extends SuperComponent {
     constructor() {
         super(...arguments);
@@ -28,15 +27,20 @@ let Cascader = class Cascader extends SuperComponent {
             multipleSlots: true,
         };
         this.properties = props;
+        this.controlledProps = [
+            {
+                key: 'value',
+                event: 'change',
+            },
+        ];
         this.data = {
             prefix,
             name,
             stepIndex: 0,
             selectedIndexes: [],
             selectedValue: [],
-            defaultOptionLabel,
             scrollTopList: [],
-            steps: [defaultOptionLabel],
+            steps: [],
         };
         this.observers = {
             visible(v) {
@@ -44,14 +48,15 @@ let Cascader = class Cascader extends SuperComponent {
                     const $tabs = this.selectComponent('#tabs');
                     $tabs === null || $tabs === void 0 ? void 0 : $tabs.setTrack();
                     this.updateScrollTop();
+                    this.initWithValue();
                 }
             },
-            'value, options'() {
+            value() {
                 this.initWithValue();
             },
             'selectedIndexes, options'() {
                 var _a, _b, _c, _d;
-                const { options, selectedIndexes, keys } = this.data;
+                const { options, selectedIndexes, keys, placeholder } = this.data;
                 const selectedValue = [];
                 const steps = [];
                 const items = [options];
@@ -67,7 +72,7 @@ let Cascader = class Cascader extends SuperComponent {
                     }
                 }
                 if (steps.length < items.length) {
-                    steps.push(defaultOptionLabel);
+                    steps.push(placeholder);
                 }
                 this.setData({
                     steps,
@@ -87,11 +92,14 @@ let Cascader = class Cascader extends SuperComponent {
         };
         this.methods = {
             initWithValue() {
-                if (this.data.value != null) {
+                if (this.data.value != null && this.data.value !== '') {
                     const selectedIndexes = this.getIndexesByValue(this.data.options, this.data.value);
                     if (selectedIndexes) {
                         this.setData({ selectedIndexes });
                     }
+                }
+                else {
+                    this.setData({ selectedIndexes: [] });
                 }
             },
             getIndexesByValue(options, value) {
@@ -154,7 +162,7 @@ let Cascader = class Cascader extends SuperComponent {
                 }
                 selectedIndexes[level] = index;
                 selectedIndexes.length = level + 1;
-                this.triggerEvent('pick', { value: item[(_a = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _a !== void 0 ? _a : 'value'], index });
+                this.triggerEvent('pick', { value: item[(_a = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _a !== void 0 ? _a : 'value'], index, level });
                 if ((_c = item === null || item === void 0 ? void 0 : item[(_b = keys === null || keys === void 0 ? void 0 : keys.children) !== null && _b !== void 0 ? _b : 'children']) === null || _c === void 0 ? void 0 : _c.length) {
                     this.setData({ selectedIndexes });
                 }
@@ -162,7 +170,7 @@ let Cascader = class Cascader extends SuperComponent {
                     this.setData({ selectedIndexes }, () => {
                         var _a;
                         const { items } = this.data;
-                        this.triggerEvent('change', {
+                        this._trigger('change', {
                             value: item[(_a = keys === null || keys === void 0 ? void 0 : keys.value) !== null && _a !== void 0 ? _a : 'value'],
                             selectedOptions: items.map((item, index) => item[selectedIndexes[index]]),
                         });

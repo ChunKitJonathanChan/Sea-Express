@@ -1,5 +1,6 @@
 {
   "component": true,
+  "styleIsolation": "apply-shared",
   "usingComponents": {
     "t-cell": "/miniprogram_npm/tdesign-miniprogram/cell/cell",
     "t-cascader": "/miniprogram_npm/tdesign-miniprogram/cascader/cascader",
@@ -8,6 +9,7 @@
     "t-input": "/miniprogram_npm/tdesign-miniprogram/input/input",
     "t-button": "/miniprogram_npm/tdesign-miniprogram/button/button",
     "t-divider": "/miniprogram_npm/tdesign-miniprogram/divider/divider",
-    "t-textarea": "/miniprogram_npm/tdesign-miniprogram/textarea/textarea"
+    "t-textarea": "/miniprogram_npm/tdesign-miniprogram/textarea/textarea",
+    "t-toast": "/miniprogram_npm/tdesign-miniprogram/toast/toast"
   }
 }

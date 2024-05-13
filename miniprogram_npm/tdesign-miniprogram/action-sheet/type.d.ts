@@ -19,7 +19,15 @@ export interface TdActionSheetProps {
         type: ArrayConstructor;
         value?: Array<string | ActionSheetItem>;
     };
+    popupProps?: {
+        type: ObjectConstructor;
+        value?: object;
+    };
     showCancel?: {
+        type: BooleanConstructor;
+        value?: boolean;
+    };
+    showOverlay?: {
         type: BooleanConstructor;
         value?: boolean;
     };
@@ -40,4 +48,6 @@ export interface ActionSheetItem {
     label: string;
     color?: string;
     disabled?: boolean;
+    icon?: string;
+    suffixIcon?: string;
 }

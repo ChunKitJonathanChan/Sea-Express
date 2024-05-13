@@ -25,6 +25,9 @@
   bottom: 0;
   transform: scale(1.5);
 }
+.t-progress {
+  --td-progress-track-bg-color: var(--td-bg-color-component, var(--td-gray-color-3, #e7e7e7));
+}
 .t-progress__inner {
   position: relative;
   height: 100%;

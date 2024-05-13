@@ -45,7 +45,7 @@ overlay-props | Object | {} | 遮罩层属性，透传至 Overlay | N
 placement | String | middle | 弹窗展示位置。可选项： top/middle/bottom | N
 prevent-scroll-through | Boolean | false | 防止滚动穿透，即不允许点击和滚动 | N
 show-overlay | Boolean | false | 是否显示遮罩层 | N
-theme | String | - | 提示类型。可选项：loading/success/error | N
+theme | String | - | 提示类型。可选项：loading/success/error，skyline模式下暂不支持枚举值loading | N
 
 ### Toast Events
 
@@ -53,3 +53,19 @@ theme | String | - | 提示类型。可选项：loading/success/error | N
 -- | -- | --
 close | \- | 轻提示隐藏的时候触发
 destory | \- | 轻提示销毁的时候触发
+
+### Toast 外部样式类
+类名 | 说明
+-- | -- 
+t-class | 根节点样式类
+
+### CSS 变量
+组件提供了下列 CSS 变量，可用于自定义样式。
+名称 | 默认值 | 描述 
+-- | -- | --
+--td-toast-bg-color | @font-gray-2 | - 
+--td-toast-color | @font-white-1 | - 
+--td-toast-column-icon-size | 64rpx | - 
+--td-toast-max-width | 374rpx | - 
+--td-toast-radius | 8rpx | - 
+--td-toast-row-icon-size | 48rpx | - 

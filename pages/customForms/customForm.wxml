@@ -1,39 +1,41 @@
 <!--pages/customForms/customForm.wxml-->
-<form>
+<form catchsubmit="submitForm">
   <view class="title_container">
     <text>包邮预报</text>
   </view>
   <view>
     <!-- Warehouse Address -->
     <t-cell title="送货仓库" note="{{note}}" bind:click="showCascader" ></t-cell>
-    <t-cascader  visible="{{visible}}" keys="{{keys}}" options="{{options}}" title="请选择地址" sub-titles="{{subTitles}}" bind:change="onChange"></t-cascader>
+    <t-cascader visible="{{visible}}" keys="{{keys}}" options="{{options}}" title="请选择地址" sub-titles="{{subTitles}}" bind:change="onChange"></t-cascader>
 
-    <!-- Carrier --> <!-- Scrolling effect doesn't work on emulator, test on real device -->
+    <!-- Carrier --> 
     <t-cell title="快递公司"  note="{{carrierText}}" bind:click="onPicker" />
-    <t-picker visible="{{carrierVisible}}" value="{{carrierValue}}" data-key="carrier" title="{{carrierTitle}}" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindpick="onColumnChange" bindcancel="onPickerCancel">
-      <t-picker-item options="{{carriers}}"></t-picker-item>
+    <t-picker visible="{{carrierVisible}}" value="{{carrierValue}}" title="{{carrierTitle}}" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindcancel="onPickerCancel">
+      <t-picker-item name="warehouse" options="{{carriers}}"></t-picker-item>
     </t-picker>
 
-    <!-- tracking number-->
-    <t-input label="快递单号" placeholder="请输入快递单号" align="right"></t-input>
+    <!-- Tracking number-->
+    <t-input name="tracking_number" label="快递单号" placeholder="请输入快递单号" align="right" bindblur="onInput"></t-input>
 
-    <t-divider/>
+    <t-divider></t-divider>
 
-    <!-- item list-->
+    <!-- Item list-->
     <view class='item-list-container'>
       <view class="item-row" wx:for="{{items}}" wx:key="index">
-        <t-input class="item-input" layout="vertical" size="small" label="物品名称" bindinput="onItemNameInput" data-index="{{index}}"></t-input>
-        <t-input class="item-input" layout="vertical" size="small" label="数量" bindinput="onQuantityInput" data-index="{{index}}" maxlength="3"></t-input>
-        <t-input class="item-input" label="价格" layout="vertical" size="small" type="number" maxlength="4" bindinput="onPriceInput" data-index="{{index}}"></t-input>
+        <t-input class="item-input" name="item_name{{index}}" layout="vertical" size="small" label="物品名称" bindinput="onItemNameInput" data-index="{{index}}"></t-input>
+        <t-input class="item-input" name="item_quantity{{index}}" layout="vertical" size="small" label="数量" bindinput="onQuantityInput" data-index="{{index}}" maxlength="3"></t-input>
+        <t-input class="item-input" name="item_price{{index}}" label="价格" layout="vertical" size="small" type="number" maxlength="4" bindinput="onPriceInput" data-index="{{index}}"></t-input>
       </view>
       <t-button class="item-list-btn" type="primary" size="extra-small" bindtap="addItemRow" theme="light" variant="outline">添加物品</t-button>
     </view>
 
-    <t-divider/>
+    <t-divider></t-divider>
 
     <t-textarea
-      label="备注" placeholder="如有特殊要求或其他资料请写在这里" disableDefaultPadding="{{true}}" autosize="{{text_area_autosize}}"
+      name="addition_note" label="备注" placeholder="如有特殊要求或其他资料请写在这里" disableDefaultPadding="{{true}}" autosize="{{text_area_autosize}}"
     />
-    <t-button form-type="submit" theme="primary" size="large" block t-class="external-class">提交</t-button>
+    <t-toast wx:if="{{requestStatus === 'success'}}" class="t-toast_success" id="t-toast"></t-toast>
+    <t-toast wx:elseif="{{requestStatus === 'error'}}" class="t-toast_error" id="t-toast"></t-toast>
+    <t-button type="submit" theme="primary" size="large" block t-class="external-class">提交</t-button>
   </view>
 </form>
