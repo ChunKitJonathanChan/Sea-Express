@@ -1,51 +1,41 @@
 {
   "pages": [
-    
-    "pages/index/index",
+    "pages/main/index",
     "pages/logs/logs",
     "pages/logins/login",
-    "pages/packages/package",
     "pages/customForms/customForm",
-    "pages/announcement/announcement",
-    "pages/index1/index"
-
-    
+    "pages/announcement/announcement"
   ],
   "usingComponents": {
     "t-button": "/miniprogram_npm/tdesign-miniprogram/button/button"
   },
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Sea Express",
-    "navigationBarBackgroundColor": "#ffffff"
+    "navigationBarBackgroundColor": "#82B8E9",
+    "navigationBarTitleText": "虾图速达",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
+    "selectedColor": "#82B8E9",
     "list": [{
-      "pagePath": "pages/index/index",
+      "pagePath": "pages/main/index",
       "text": "首页",
-      "iconPath": "images/tabbar_home.png",
-      "selectedIconPath": "images/tabbar_home_HL.png"
+      "iconPath": "images/tabbar/tabbar_home.png",
+      "selectedIconPath": "images/tabbar/tabbar_home_HL.png"
     },{
       "pagePath": "pages/customForms/customForm",
-      "text": "包裹",
-      "iconPath": "images/tabbar_package.png",
-      "selectedIconPath": "images/tabbar_package_HL.png"
-    },{
-      "pagePath": "pages/logins/login",
-      "text": "登录",
-      "iconPath": "images/tabbar_login.png",
-      "selectedIconPath": "images/tabbar_login_HL.png"
+      "text": "预报",
+      "iconPath": "images/tabbar/tabbar_custom_form.png",
+      "selectedIconPath": "images/tabbar/tabbar_custom_form_HL.png"
     },{
       "pagePath": "pages/announcement/announcement",
       "text": "公告",
-      "iconPath": "images/tabbar_package.png",
-      "selectedIconPath": "images/tabbar_package_HL.png"
-    }
-    ,{
-      "pagePath": "pages/index1/index",
-      "text": "主页",
-      "iconPath": "images/tabbar_package.png",
-      "selectedIconPath": "images/tabbar_package_HL.png"
+      "iconPath": "images/tabbar/tabbar_annoucement.png",
+      "selectedIconPath": "images/tabbar/tabbar_annoucement_HL.png"
+    },{
+      "pagePath": "pages/logins/login",
+      "text": "登录",
+      "iconPath": "images/tabbar/tabbar_login.png",
+      "selectedIconPath": "images/tabbar/tabbar_login_HL.png"
     }
   ]
   },

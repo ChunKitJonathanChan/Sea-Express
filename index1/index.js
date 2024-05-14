@@ -1,4 +1,4 @@
-var util=require('util.js');
+var util=require('../pages/main/node_modules/util.js.js');
 Page({
 
   data: {
