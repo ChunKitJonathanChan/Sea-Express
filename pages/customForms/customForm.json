@@ -8,8 +8,9 @@
     "t-picker-item": "/miniprogram_npm/tdesign-miniprogram/picker-item/picker-item",
     "t-input": "/miniprogram_npm/tdesign-miniprogram/input/input",
     "t-button": "/miniprogram_npm/tdesign-miniprogram/button/button",
-    "t-divider": "/miniprogram_npm/tdesign-miniprogram/divider/divider",
     "t-textarea": "/miniprogram_npm/tdesign-miniprogram/textarea/textarea",
-    "t-toast": "/miniprogram_npm/tdesign-miniprogram/toast/toast"
+    "t-toast": "/miniprogram_npm/tdesign-miniprogram/toast/toast",
+    "t-row": "/miniprogram_npm/tdesign-miniprogram/row/row",
+    "t-col": "/miniprogram_npm/tdesign-miniprogram/col/col"
   }
 }

@@ -24,18 +24,25 @@ Component({
     },
 
     jump: function (e) {
-      var url = e.currentTarget.dataset.jump;
-      if (url == 'packagePredictTrans' || url == 'index' || url == 'member'){
-            wx.switchTab({
-              url: '../' + url + "/" + url,
-            })
+      const navigateTo = e.currentTarget.dataset.jump;
+      if (navigateTo == 'packagePredictTrans'){
+        wx.switchTab({
+          url: '/pages/logins/login',
+        })
       }
-      else{
-        wx.navigateTo({
-          url: '../' + url + "/" + url,
-          complete: function () {
-            console.log('success')
-          }
+      else if (navigateTo == 'arrivedPackageTrans'){
+        wx.switchTab({
+          url: '/pages/logins/login',
+        })
+      }
+      else if (navigateTo == 'volumeStart'){
+        wx.switchTab({
+          url: '/pages/logins/login',
+        })
+      }
+      else if (navigateTo == 'mywaybillTrans'){
+        wx.switchTab({
+          url: '/pages/logins/login',
         })
       }
     }
