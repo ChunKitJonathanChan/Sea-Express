@@ -16,30 +16,34 @@
   },
   "tabBar": {
     "selectedColor": "#82B8E9",
-    "list": [{
-      "pagePath": "pages/main/index",
-      "text": "首页",
-      "iconPath": "images/tabbar/tabbar_home.png",
-      "selectedIconPath": "images/tabbar/tabbar_home_HL.png"
-    },{
-      "pagePath": "pages/customForms/customForm",
-      "text": "预报",
-      "iconPath": "images/tabbar/tabbar_custom_form.png",
-      "selectedIconPath": "images/tabbar/tabbar_custom_form_HL.png"
-    },{
-      "pagePath": "pages/announcement/announcement",
-      "text": "公告",
-      "iconPath": "images/tabbar/tabbar_annoucement.png",
-      "selectedIconPath": "images/tabbar/tabbar_annoucement_HL.png"
-    },{
-      "pagePath": "pages/logins/login",
-      "text": "登录",
-      "iconPath": "images/tabbar/tabbar_login.png",
-      "selectedIconPath": "images/tabbar/tabbar_login_HL.png"
-    }
-  ]
+    "list": [
+      {
+        "pagePath": "pages/main/index",
+        "text": "首页",
+        "iconPath": "images/tabbar/tabbar_home.png",
+        "selectedIconPath": "images/tabbar/tabbar_home_HL.png"
+      },
+      {
+        "pagePath": "pages/customForms/customForm",
+        "text": "预报",
+        "iconPath": "images/tabbar/tabbar_custom_form.png",
+        "selectedIconPath": "images/tabbar/tabbar_custom_form_HL.png"
+      },
+      {
+        "pagePath": "pages/announcement/announcement",
+        "text": "公告",
+        "iconPath": "images/tabbar/tabbar_annoucement.png",
+        "selectedIconPath": "images/tabbar/tabbar_annoucement_HL.png"
+      },
+      {
+        "pagePath": "pages/logins/login",
+        "text": "登录",
+        "iconPath": "images/tabbar/tabbar_login.png",
+        "selectedIconPath": "images/tabbar/tabbar_login_HL.png"
+      }
+    ]
   },
   "componentFramework": "glass-easel",
-  "sitemapLocation": "sitemap.json"
- 
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
 }

@@ -44,7 +44,7 @@ Component({
 
     // Carrier
     carrierText: '请选择快递公司',
-    carrierValue: '',
+    carrierValue: [],
     carrierTitle: '',
     carriers: [
       { label: 'EMS', value: 'EMS' },
@@ -68,9 +68,13 @@ Component({
 
     // Tracking number
     tracking_filled: false,
+    tracking_number_tips: '',
 
     // item list
-    items: [{itemName: '', quantity: '', price: ''}],
+    items: [{name: '', quantity: '', price: ''}],
+
+    // item list - remove-button
+    remove_button_visible: false,
 
     // additional note
     text_area_autosize: {
@@ -118,10 +122,15 @@ Component({
     },
 
     // Tracking number
-    onInput(e) {
+    onTrackingInput(e) {
       if (e.detail.value !== "") {
         this.setData({
+          tracking_number_tips: '',
           tracking_filled: true
+        })
+      } else {
+        this.setData({
+          tracking_filled: false
         })
       }
     },
@@ -131,7 +140,7 @@ Component({
       const index = e.currentTarget.dataset.index; 
       const value = e.detail.value; 
       this.setData({
-        [`items[${index}].itemName`]: value
+        [`items[${index}].name`]: value
       });
     },
 
@@ -147,14 +156,23 @@ Component({
       const index = e.currentTarget.dataset.index;
       const value = e.detail.value; 
       this.setData({
-        [`items[${index}].price`]: value
+        [`items[${index}].price`]: value,
       });
     },
 
     addItemRow() {
-      const newItem = { itemName: '', quantity: '', price: '' }; 
+      const newItem = { name: '', quantity: '', price: '' }; 
       this.setData({
-        items: this.data.items.concat(newItem)
+        items: this.data.items.concat(newItem),
+        remove_button_visible: true
+      });
+    },
+
+    removeItemRow(e) {
+      const index = e.currentTarget.dataset.index
+      const updatedItems = this.data.items.toSpliced(index, 1); 
+      this.setData({
+        items: updatedItems,
       });
     },
 
@@ -165,6 +183,7 @@ Component({
       formData.warehouse_city = this.data.warehouse_city
       formData.warehouse_district = this.data.warehouse_district
       formData.carrier = this.data.carrierValue[0] !== undefined? this.data.carrierValue[0]: ""
+      formData.items = this.data.items
       console.log(formData)
 
       if (this.data.warehouse_selected && this.data.carrier_selected && this.data.tracking_filled) {
@@ -211,7 +230,11 @@ Component({
         });  
       } 
       else {
-        // under construction
+        if (!this.data.tracking_filled) {
+          this.setData({
+            tracking_number_tips: '错误: 必须填写快递单号'
+          })
+        }
       }
     }
   },
