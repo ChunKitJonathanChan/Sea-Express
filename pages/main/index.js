@@ -1,5 +1,3 @@
-const util = require('util.js');
-
 const swiperList = [
   "/images/index/logo.png",
   "/images/index/logo.png"
