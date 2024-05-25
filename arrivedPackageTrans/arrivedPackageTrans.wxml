@@ -1,0 +1,89 @@
+<!--pages/arrivedPackageTrans/arrivedPackageTrans.wxml-->
+<form bindsubmit="formSubmit">
+<view class="top">
+  <view class="left">
+    
+  </view>
+  <view class="center">
+    
+  </view>
+  <view class="right">
+    <button type="primary" class="common" style="background-color: #f9364f; width: 437rpx; position: relative; left: -325rpx; top: 0rpx; height: 48rpx; display: block; box-sizing: border-box" bindtap="jump" data-jump="arrivedPackageTrans" >我的包裹</button>
+  </view>
+</view>
+
+<view class="middle-form">
+  <view class="top-wrap">
+      <image src="../../images/trans/2.png" class="img"></image>
+      <text class="word-tip">包裹认领</text>
+  </view>
+  <view class="switch-btn">
+    <view class="arrive">
+      <button style="margin: 0; background-color: #0398e7; color: #ffffff; width: 520rpx; line-height: 2; position: relative; left: 175rpx; top: 0rpx; height: 66rpx; display: block; box-sizing: border-box">到库包裹</button>
+    </view>
+    
+  </view>
+  <view class="row">
+          <view class="fleft">
+              快递公司
+          </view>
+        
+          <view class="fright">
+           <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+              <view class="picker">
+                  <text style="margin-left:5px;color:#848484;">{{array[index]}}</text>
+                  <view style="float:right;margin-right:5px;">
+                        <image src="../../images/common/Arrow-bottom.png" class="arrow"></image>
+                  </view>
+              </view>
+            </picker>
+          </view>
+      </view>
+      <view class="hr"></view>
+      <view class="table">
+        <view class="top-row">
+          <view class="top-all-select">
+            <!-- <radio value="" checked=""/> -->
+                        <checkbox value="" bindtap="allSelect" color="#f9364f"/>
+
+          </view>
+          <view style="width: 10%; position: relative; left: -46rpx; top: 0rpx">全选</view>
+          <view class="top-detail" style="position: relative; left: -91rpx; top: 4rpx">物品详情</view>
+          
+          
+        </view>
+     
+      <block wx:for="{{packages}}">
+        <view class="row">
+          <view class="all-select">
+            <!-- <radio value="" checked=""/> -->
+            <checkbox value="" color="#f9364f" checked="{{allcheck}}"/>
+          </view>
+          <view class="wrap">
+            <view class="detail" style="width: 606rpx; height: 100rpx; display: block; box-sizing: border-box">
+                
+               <view class="label">
+                    快递单号: <text class="word">{{item.waybillNum}}</text>
+                </view><view class="label">
+                    状态: <text class="word">{{item.status}}</text>
+                </view>
+            </view>
+            
+            
+          </view>
+        </view>
+      </block>
+      
+        <!--end  -->
+      </view>
+</view>
+
+<view class="btnWrap">
+  <button form-type="submit" class="submitbtn">提交合箱转运</button>
+</view>
+</form>
+
+
+
+
+
