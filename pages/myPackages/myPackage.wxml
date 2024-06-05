@@ -48,7 +48,7 @@
 <view wx:if="{{checkboxShow}}">
   <t-cell title="快递公司" note="{{carrierText}}" bind:click="onPicker"/>
   <t-picker visible="{{carrierVisible}}" value="{{carrierValue}}"  title="{{carrierTitle}}" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindcancel="onPickerCancel">
-    <t-picker-item name="warehouse" options="{{carriers}}"></t-picker-item>
+    <t-picker-item options="{{carriers}}"></t-picker-item>
   </t-picker>
   <t-button class="submit_btn" type="submit" theme="primary" size="large" block>提交</t-button>
 </view>

@@ -2,38 +2,95 @@
 
 const {showToast} = require('../../miniprogram_npm/tdesign-miniprogram/toast/index');
 
-const location_data = {
-  areaList: [
-    {
-      label: '广东省',
-      value: '广东省',
-      children: [
-        {
-          value: '广州市',
-          label: '广州市',
-          children: [
-            { value: '越秀区', label: '越秀区' },
-            { value: '荔湾区', label: '荔湾区' },
-            { value: '海珠区', label: '海珠区' },
-            { value: '天河区', label: '天河区' },
-            { value: '白云区', label: '白云区' },
-            { value: '黄埔区', label: '黄埔区' },
-            { value: '番禺区', label: '番禺区' },
-            { value: '花都区', label: '花都区' },
-            { value: '南沙区', label: '南沙区' },
-            { value: '增城区', label: '增城区' },
-            { value: '从化区', label: '从化区' },
-          ],
-        },
-      ],
-    },
-  ]
+const areaList = {
+  provinces: {
+    440000: '广东省',
+  },
+  cities: {
+    440100: '广州市',
+    440200: '韶关市',
+    440300: '深圳市',
+    440400: '珠海市',
+    440500: '汕头市',
+    440600: '佛山市',
+  },
+  counties: {
+    440103: '荔湾区',
+    440104: '越秀区',
+    440105: '海珠区',
+    440106: '天河区',
+    440111: '白云区',
+    440112: '黄埔区',
+    440113: '番禺区',
+    440114: '花都区',
+    440115: '南沙区',
+    440117: '从化区',
+    440118: '增城区',
+    440203: '武江区',
+    440204: '浈江区',
+    440205: '曲江区',
+    440222: '始兴县',
+    440224: '仁化县',
+    440229: '翁源县',
+    440232: '乳源瑶族自治县',
+    440233: '新丰县',
+    440281: '乐昌市',
+    440282: '南雄市',
+    440303: '罗湖区',
+    440304: '福田区',
+    440305: '南山区',
+    440306: '宝安区',
+    440307: '龙岗区',
+    440308: '盐田区',
+    440309: '龙华区',
+    440310: '坪山区',
+    440311: '光明区',
+    440402: '香洲区',
+    440403: '斗门区',
+    440404: '金湾区',
+    440507: '龙湖区',
+    440511: '金平区',
+    440512: '濠江区',
+    440513: '潮阳区',
+    440514: '潮南区',
+    440515: '澄海区',
+    440523: '南澳县',
+    440604: '禅城区',
+    440605: '南海区',
+    440606: '顺德区',
+    440607: '三水区',
+    440608: '高明区',
+  },
 };
+
+function locationMapping(areaList) {
+  const provinces = Object.keys(areaList.provinces).map(provinceKey => {
+    const cities = Object.keys(areaList.cities).filter(cityKey => cityKey.startsWith(provinceKey.slice(0, 2))).map(cityKey => {
+      const counties = Object.keys(areaList.counties).filter(countyKey => countyKey.startsWith(cityKey.slice(0, 4))).map(countyKey => ({
+        value: countyKey,
+        label: areaList.counties[countyKey],
+      }));
+      return {
+        value: cityKey,
+        label: areaList.cities[cityKey],
+        children: counties,
+      };
+    });
+    return {
+      value: provinceKey,
+      label: areaList.provinces[provinceKey],
+      children: cities,
+    };
+  });
+  return provinces;
+}
+
+const locationOptions = locationMapping(areaList);
 
 Component({
   data: {
     // Warehouse
-    options: location_data.areaList,
+    options: locationOptions,
     note: '请选择地址',
     visible: false,
     subTitles: ['请选择省份', '请选择城市', '请选择区/县'],

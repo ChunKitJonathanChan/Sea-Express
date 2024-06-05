@@ -5,7 +5,8 @@
     "pages/logins/login",
     "pages/customForms/customForm",
     "pages/announcement/announcement",
-    "pages/myPackages/myPackage"
+    "pages/myPackages/myPackage",
+    "pages/costCalcs/costCalc"
   ],
   "usingComponents": {
     "t-button": "/miniprogram_npm/tdesign-miniprogram/button/button"
