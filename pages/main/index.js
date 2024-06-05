@@ -33,9 +33,9 @@ Component({
           url: '/pages/myPackages/myPackage',
         })
       }
-      else if (navigateTo == 'volumeStart'){
-        wx.switchTab({
-          url: '/pages/logins/login',
+      else if (navigateTo == 'costCalc'){
+        wx.navigateTo({
+          url: '/pages/costCalcs/costCalc',
         })
       }
       else if (navigateTo == 'mywaybillTrans'){

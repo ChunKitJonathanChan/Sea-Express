@@ -1,0 +1,13 @@
+{
+  "component": true,
+  "usingComponents": {
+    "t-cell": "/miniprogram_npm/tdesign-miniprogram/cell/cell",
+    "t-cascader": "/miniprogram_npm/tdesign-miniprogram/cascader/cascader",
+    "t-picker": "/miniprogram_npm/tdesign-miniprogram/picker/picker",
+    "t-picker-item": "/miniprogram_npm/tdesign-miniprogram/picker-item/picker-item",
+    "t-input": "/miniprogram_npm/tdesign-miniprogram/input/input",
+    "t-button": "/miniprogram_npm/tdesign-miniprogram/button/button",
+    "t-row": "/miniprogram_npm/tdesign-miniprogram/row/row",
+    "t-col": "/miniprogram_npm/tdesign-miniprogram/col/col"
+  }
+}

@@ -1,0 +1,54 @@
+<!--pages/costCalcs/costCalc.wxml-->
+
+<view class="title_container">
+  <text>运费查询系统</text>
+</view>
+
+<view class="top">
+  <!-- Destination -->
+  <t-cell title="目的地" note="{{note}}" bind:click="showCascader" />
+  <t-cascader visible="{{visible}}" keys="{{keys}}" options="{{options}}" title="请选择地址" sub-titles="{{subTitles}}" bind:change="onChange"></t-cascader>
+
+  <!-- Shipping method
+  <t-cell title="运输方式" note="{{pickerText}}" bind:click="onPicker"/>
+  <t-picker visible="{{pickerVisible}}" value="{{pickerValue}}"  title="{{pickerTitle}}" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindcancel="onPickerCancel">
+    <t-picker-item options="{{methods}}"></t-picker-item>
+  </t-picker> -->
+
+  <!-- Weight -->
+  <t-input label="重量(KG)" placeholder="请输入重量" align="right" bindblur="onInput"></t-input>
+
+  <t-button class="top-btn" theme="primary" size="medium" bind:tap="calculateExpense">运费计算</t-button>
+</view>
+
+<view wx:if="{{calculationShow}}" class="hr"></view>
+
+<view wx:if="{{calculationShow}}" class="table">
+  <view class="tr bg-w">
+    <view class="th">运输方式</view>
+    <view class="th">预计运期</view>
+    <view class="th">价格/重量</view>
+    <view class="th">估计成本</view>
+  </view>
+  <view class="tr">
+    <view class="td">DHL纯普货</view>
+    <view class="td">{{ground_expected_day}}个工作日</view>
+    <view class="td"><text class="price">{{ground_price_kg}}rmb</text>/1kg</view>
+    <view class="td">{{ground_result}}rmb</view>
+  </view>
+  <view class="tr">
+    <view class="td">DHL普货</view>
+    <view class="td">{{express_expected_day}}个工作日</view>
+    <view class="td"><text class="price">{{express_price_kg}}rmb</text>/1kg</view>
+    <view class="td">{{express_result}}rmb</view>
+  </view>
+  <view class="tr">
+     <view class="td">海运</view>
+     <view class="td">{{sea_expected_day}}个工作日</view>
+     <view class="td"><text class="price">{{sea_price_kg}}rmb</text>/1kg</view>
+     <view class="td">{{sea_result}}rmb</view>
+  </view>
+</view>  
+
+
+  
