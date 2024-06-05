@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/logins/login",
     "pages/customForms/customForm",
-    "pages/announcement/announcement"
+    "pages/announcement/announcement",
+    "pages/myPackages/myPackage"
   ],
   "usingComponents": {
     "t-button": "/miniprogram_npm/tdesign-miniprogram/button/button"

@@ -28,9 +28,9 @@ Component({
           url: '/pages/logins/login',
         })
       }
-      else if (navigateTo == 'arrivedPackageTrans'){
-        wx.switchTab({
-          url: '/pages/logins/login',
+      else if (navigateTo == 'myPackage'){
+        wx.navigateTo({
+          url: '/pages/myPackages/myPackage',
         })
       }
       else if (navigateTo == 'volumeStart'){
