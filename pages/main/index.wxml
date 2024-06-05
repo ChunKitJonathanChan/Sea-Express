@@ -6,7 +6,7 @@
 <view class="function-tab" >
   <t-grid column="{{4}}">
     <t-grid-item class="t-grid-item" text="国际转运" image="/images/index/trans.png" bind:click="jump" data-jump="packagePredictTrans"/>
-    <t-grid-item class="t-grid-item" text="我的包裹" image="/images/index/pack.png" bind:click="jump" data-jump="arrivedPackageTrans"/>
+    <t-grid-item class="t-grid-item" text="我的包裹" image="/images/index/pack.png" bind:click="jump" data-jump="myPackage"/>
     <t-grid-item class="t-grid-item" text="体积计算" image="/images/index/calc.png" bind:click="jump" data-jump="volumeStart"/>
     <t-grid-item class="t-grid-item" text="我的运单" image="/images/index/waybill.png" bind:click="jump" data-jump="mywaybillTrans"/>
   </t-grid>

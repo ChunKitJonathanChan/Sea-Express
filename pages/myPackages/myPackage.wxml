@@ -1,0 +1,54 @@
+<!--pages/myPackages/myPackage.wxml-->
+
+<view class="title_container">
+  <text>我的包裹</text>
+</view>
+
+<t-cell wx:if="{{!emptyShow}}">
+  <t-search slot="title"></t-search>
+  <text slot="note">选项</text>
+  <t-switch class="option-switch" slot="note" label="{{['开', '关']}}" bind:change="optionChange"></t-switch>
+</t-cell>
+
+<scroll-view scroll-y="true" class="main-view" enable-flex="{{emptyShow}}">
+    <view wx:if="{{emptyShow}}" >
+      <t-empty class="empty" icon="folder-open-1" description="没有任何包裹">
+        <view slot="description">
+          <text class="empty-description-second">按以下按钮提交包裹预报</text>
+        </view>
+        <t-button class="empty-button" slot="action" theme="primary" size="large" bindtap="navigateCustomForm">包裹预报</t-button>
+      </t-empty>
+    </view>
+    <view wx:elif="{{checkboxShow}}">
+      <t-checkbox-group class="card" value="{{checkboxSelected}}" bind:change='onCheckboxChange'>
+        <t-checkbox label="全选" checkAll="true" icon="rectangle"></t-checkbox>
+        <view 
+          wx:for="{{packageList}}" 
+          wx:key="index" 
+        >
+          <t-checkbox
+            value="{{item.value}}" 
+            label="快递单号: {{item.label}}"
+            content="状态: {{item.content}}"
+            icon="rectangle"
+          />
+        </view>
+      </t-checkbox-group>
+    </view>
+    <view wx:else>
+      <t-cell-group class="t-cell-group" theme="card">
+        <t-cell wx:for="{{packageList}}" wx:key="index"
+          title="快递单号: {{item.label}}"
+          description="状态: {{item.content}}"
+        >
+        </t-cell>
+      </t-cell-group>
+    </view>
+</scroll-view>
+<view wx:if="{{checkboxShow}}">
+  <t-cell title="快递公司" note="{{carrierText}}" bind:click="onPicker"/>
+  <t-picker visible="{{carrierVisible}}" value="{{carrierValue}}"  title="{{carrierTitle}}" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindcancel="onPickerCancel">
+    <t-picker-item name="warehouse" options="{{carriers}}"></t-picker-item>
+  </t-picker>
+  <t-button class="submit_btn" type="submit" theme="primary" size="large" block>提交</t-button>
+</view>
