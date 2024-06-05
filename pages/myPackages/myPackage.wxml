@@ -50,5 +50,5 @@
   <t-picker visible="{{carrierVisible}}" value="{{carrierValue}}"  title="{{carrierTitle}}" cancelBtn="取消" confirmBtn="确认" bindchange="onPickerChange" bindcancel="onPickerCancel">
     <t-picker-item options="{{carriers}}"></t-picker-item>
   </t-picker>
-  <t-button class="submit_btn" type="submit" theme="primary" size="large" block>提交</t-button>
+  <t-button class="submit_btn" type="submit" theme="primary" size="large" block>提交合箱转运</t-button>
 </view>
