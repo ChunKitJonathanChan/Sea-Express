@@ -33,20 +33,20 @@
   <view class="tr">
     <view class="td">DHL纯普货</view>
     <view class="td">{{ground_expected_day}}个工作日</view>
-    <view class="td"><text class="price">{{ground_price_kg}}rmb</text>/1kg</view>
-    <view class="td">{{ground_result}}rmb</view>
+    <view class="td"><text class="price">¥{{ground_price_kg}}</text>/1kg</view>
+    <view class="td">¥{{ground_result}}</view>
   </view>
   <view class="tr">
     <view class="td">DHL普货</view>
     <view class="td">{{express_expected_day}}个工作日</view>
-    <view class="td"><text class="price">{{express_price_kg}}rmb</text>/1kg</view>
-    <view class="td">{{express_result}}rmb</view>
+    <view class="td"><text class="price">¥{{express_price_kg}}</text>/1kg</view>
+    <view class="td">¥{{express_result}}</view>
   </view>
   <view class="tr">
      <view class="td">海运</view>
      <view class="td">{{sea_expected_day}}个工作日</view>
-     <view class="td"><text class="price">{{sea_price_kg}}rmb</text>/1kg</view>
-     <view class="td">{{sea_result}}rmb</view>
+     <view class="td"><text class="price">¥{{sea_price_kg}}</text>/1kg</view>
+     <view class="td">¥{{sea_result}}</view>
   </view>
 </view>  
 
